@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Top-Up Pharmacy — customer storefront
 
-## Getting Started
-
-First, run the development server:
+Next.js 16 (App Router) · Tailwind 4 · lucide-react · GSAP + ScrollTrigger · Lenis · anime.js.
+Talks to the Pharma API (`docs/openapi.yaml`) through a same-origin proxy (`/api/v1/*` → `API_URL`),
+so the httpOnly refresh cookie is first-party and there is no CORS.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local   # then edit
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Set `NEXT_PUBLIC_DEMO=1` to run the whole customer flow against an in-browser mock (any email/password logs in).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Screens
+Home · Shop (search, category, cursor pagination) · Product · Cart (live stock/price re-check) · Checkout (delivery/pickup,
+prescription, Paystack) · Order detail (timeline, payment polling, cancel) · Orders (+reorder) · Prescriptions ·
+Account (business details, credit, statement, invoices, addresses, notifications) · Login · Register · Support widget.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Backend gaps the UI works around (flag to backend)
+- **Catalogue needs a token**, so signed-out visitors see a labelled preview (mock names, no prices/stock).
+- **No self-registration endpoint** — `/register` hands the application to the team on WhatsApp.
+- **Delivery address / pickup branch have no field** on `POST /orders`; they're stored on-device per order. `location_id` can't be chosen (no customer-readable locations list).
+- **No `GET /prescriptions` list** — ids are tracked on-device; each is fetched by id.
+- **Credit payments** aren't exposed for customer orders (option shown disabled).
+- **Category filter** maps to `products.form` (Tablet, Capsule, Syrup, Cream, Drops, Injection) — no taxonomy yet.
+- `GET /customers/{id}/statement`, `/invoices/{id}` and `PATCH /customers/{id}` are staff-auth in the OpenAPI; the UI degrades gracefully if a customer token is refused.
+- Paystack is stub-only on the backend; the redirect + polling flow is built but unverified live.
+- **Support widget**: instant in-panel reply, then WhatsApp / phone (numbers from the live site). There is no in-app live-chat backend.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Env
+See `.env.example` (Cloudinary unsigned preset needed for prescription file upload; otherwise a paste-a-link fallback is shown).

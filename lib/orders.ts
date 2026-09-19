@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { api, errInfo, newKey } from "./api";
+import { api, newKey } from "./api";
 import type { CatalogueItem, Payment } from "./types";
 
 /** Start Paystack checkout for an existing placed order. Returns the provider URL. */
@@ -16,7 +16,7 @@ export function useProducts(ids: string[]) {
   useEffect(() => {
     let live = true;
     ids.filter((i) => !cache.has(i)).forEach((i) =>
-      api<CatalogueItem>(`/catalogue/${i}`).then((p) => { cache.set(i, p); live && tick((n) => n + 1); }).catch((e) => void errInfo(e)));
+      api<CatalogueItem>(`/catalogue/${i}`).then((p) => { cache.set(i, p); if (live) tick((n) => n + 1); }).catch(() => { /* name stays generic */ }));
     return () => { live = false; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key]);

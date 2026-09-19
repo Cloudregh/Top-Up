@@ -48,6 +48,7 @@ function handle<T>(path: string, method: string, body: unknown): Promise<T> {
   });
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function route(fullPath: string, method: string, body: any): unknown {
   const [path, qs = ""] = fullPath.split("?");
   const q = new URLSearchParams(qs);

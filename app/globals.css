@@ -23,6 +23,7 @@
 }
 
 body {
+  overflow-x: clip;
   background: linear-gradient(180deg, #e6eafb 0%, #f4f5fc 40%, #fbf6f9 100%) fixed;
   color: var(--ink);
   font-family: var(--font-jakarta), system-ui, sans-serif;
