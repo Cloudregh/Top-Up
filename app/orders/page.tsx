@@ -47,7 +47,7 @@ export default function OrdersPage() {
                   <div className="min-w-0 flex-1"><p className="font-bold">Order #{shortId(o.id)}</p><p className="text-sm text-muted">{fmtDate(o.created_at)} · {o.lines.reduce((s, l) => s + l.quantity, 0)} items</p></div>
                   <StatusPill order={o} /><span className="w-24 text-right font-bold">{ghs(o.total_pesewa)}</span><ChevronRight size={18} className="text-muted" />
                 </Link>
-                <button className="btn btn-soft !py-2" onClick={() => reorder(o)}><RotateCcw size={14} /> Reorder</button>
+                <button className="btn btn-soft py-2!" onClick={() => reorder(o)}><RotateCcw size={14} /> Reorder</button>
               </div>
             ))}
             {next && <div className="pt-4 text-center"><button className="btn btn-white shadow" onClick={loadMore} disabled={more}>{more && <Loader2 size={16} className="animate-spin" />} Load more</button></div>}

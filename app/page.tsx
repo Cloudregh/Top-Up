@@ -57,11 +57,11 @@ export default function HomePage() {
         <Reveal><h2 className={`${H2} text-center`}>Health Campaigns<br />&amp; Everyday Solutions</h2></Reveal>
         <Reveal stagger={0.1} className="mt-10 grid gap-4 md:grid-cols-3">
           {CAMPAIGNS.map((c) => (
-            <Link key={c.slug} href={`/health/${c.slug}`} className="group relative block aspect-[4/5] overflow-hidden rounded-[28px] md:aspect-[3/4]" aria-label={`${c.title} — see more`}>
+            <Link key={c.slug} href={`/health/${c.slug}`} className="group relative block aspect-4/5 overflow-hidden rounded-[28px] md:aspect-3/4" aria-label={`${c.title} — see more`}>
               <Img k={c.img} w={700} h={900} alt="" className="absolute inset-0 size-full object-cover transition duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#012060]/65 via-[#012060]/5 to-[#012060]/75" />
-              <div className="absolute inset-x-0 top-0 p-5"><p className="max-w-[12rem] text-lg font-semibold leading-tight text-white drop-shadow">{c.title}</p></div>
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5"><p className="max-w-[12rem] text-xs text-white/90">{c.card}</p><span className="btn btn-white !px-4 !py-2 text-xs">See more <ArrowUpRight size={13} /></span></div>
+              <div className="absolute inset-0 bg-linear-to-b from-[#012060]/65 via-[#012060]/5 to-[#012060]/75" />
+              <div className="absolute inset-x-0 top-0 p-5"><p className="max-w-48 text-lg font-semibold leading-tight text-white drop-shadow">{c.title}</p></div>
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5"><p className="max-w-48 text-xs text-white/90">{c.card}</p><span className="btn btn-white px-4! py-2! text-xs">See more <ArrowUpRight size={13} /></span></div>
             </Link>
           ))}
         </Reveal>
@@ -77,12 +77,12 @@ export default function HomePage() {
       {/* Consult cards (Mecura doctor cards) */}
       <Pending waitingFor="CMS: home promo cards"><section className="mt-24 gutter">
         <Reveal stagger={0.12} className="grid gap-4 md:grid-cols-2">
-          <div className="relative flex min-h-[280px] overflow-hidden rounded-[28px] bg-deep p-7 text-white">
+          <div className="relative flex min-h-70 overflow-hidden rounded-[28px] bg-deep p-7 text-white">
             <div className="z-10 flex max-w-[55%] flex-col justify-between"><div><p className="text-xl font-semibold">Book an Appointment</p><p className="mt-2 text-xs text-white/70">Visit any of our branches and receive appropriate care specific to your health needs.</p></div>
               <Link href="/appointment" className="btn mt-6 w-fit bg-sky text-white hover:opacity-90">Book an appointment <ArrowUpRight size={14} /></Link></div>
             <Img k="consult_appointment" w={600} h={700} alt="Pharmacist" className="absolute bottom-0 right-0 h-full w-[46%] rounded-l-[28px] object-cover object-top" />
           </div>
-          <div className="tile relative flex min-h-[280px] overflow-hidden p-7">
+          <div className="tile relative flex min-h-70 overflow-hidden p-7">
             <div className="z-10 flex max-w-[55%] flex-col justify-between"><div><p className="text-xl font-semibold">Order your prescription medications</p><p className="mt-2 text-xs text-muted">Upload it once; a pharmacist reviews it and you order once approved.</p></div>
               <Link href="/prescriptions" className="btn btn-white mt-6 w-fit shadow-sm ring-1 ring-black/5"><FileText size={14} /> Prescriptions</Link></div>
             <Img k="consult_prescription" w={600} h={700} alt="Pharmacist with stethoscope" className="absolute bottom-0 right-0 h-full w-[46%] rounded-l-[28px] object-cover object-top" />
@@ -105,11 +105,11 @@ export default function HomePage() {
       <Pending waitingFor="CMS: awards / testimonials"><section className="mt-24 gutter">
         <Reveal className="flex flex-wrap items-end justify-between gap-4">
           <h2 className={H2}>Award-winning care,<br />trusted across Ghana</h2>
-          <p className="max-w-[220px] text-xs text-muted">Recognised by customers, insurers, suppliers and the Ghana College of Pharmacists.</p>
+          <p className="max-w-55 text-xs text-muted">Recognised by customers, insurers, suppliers and the Ghana College of Pharmacists.</p>
         </Reveal>
         <div className="mt-8"><Carousel arrows itemClass="w-[82%] sm:w-[44%] lg:w-[31%]">
           {AWARDS.map((a) => (
-            <div key={a.t} className="tile flex h-full min-h-[190px] flex-col justify-between p-6">
+            <div key={a.t} className="tile flex h-full min-h-47.5 flex-col justify-between p-6">
               <div className="flex items-center gap-1 text-amber-500">{Array.from({ length: 5 }, (_, i) => <Award key={i} size={15} />)}</div>
               <p className="mt-4 text-lg font-semibold leading-snug">{a.t}</p>
               <p className="mt-3 text-xs text-muted">{a.by}</p>
@@ -120,7 +120,7 @@ export default function HomePage() {
 
       {/* Delivery banner */}
       <Pending waitingFor="CMS: delivery promo + delivery options"><section className="mt-24 gutter">
-        <Reveal className="hero-gradient relative flex min-h-[300px] items-center overflow-hidden rounded-[30px] p-8 sm:p-14">
+        <Reveal className="hero-gradient relative flex min-h-75 items-center overflow-hidden rounded-[30px] p-8 sm:p-14">
           <div className="relative z-10 max-w-md">
             <h2 className="text-3xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">Home &amp; office delivery, your way</h2>
             <p className="mt-4 text-sm text-white/90">Choose from a number of delivery options available — and track your order live once it&apos;s dispatched.</p>

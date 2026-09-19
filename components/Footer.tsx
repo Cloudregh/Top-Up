@@ -16,7 +16,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)_1.3fr]">
           <div className="space-y-4">
             <Logo size={48} tagline />
-            <p className="max-w-[260px] text-sm text-muted">One of the best pharmacies in Ghana — a leading retail and wholesale pharmaceutical company with branches in Tema, Accra and Kumasi.</p>
+            <p className="max-w-65 text-sm text-muted">One of the best pharmacies in Ghana — a leading retail and wholesale pharmaceutical company with branches in Tema, Accra and Kumasi.</p>
           </div>
           {cols.map(([t, ls]) => (
             <div key={t}><p className="mb-4 text-sm font-bold">{t}</p><ul className="space-y-2.5 text-sm text-muted">{ls.map(([h, l]) => <li key={h}><Link href={h} className="hover:text-ink">{l}</Link></li>)}</ul></div>

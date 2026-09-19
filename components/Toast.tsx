@@ -18,7 +18,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   return (
     <Ctx.Provider value={push}>
       {children}
-      <div className="pointer-events-none fixed inset-x-0 bottom-24 z-[70] flex flex-col items-center gap-2 px-4 sm:bottom-6" aria-live="polite">
+      <div className="pointer-events-none fixed inset-x-0 bottom-24 z-70 flex flex-col items-center gap-2 px-4 sm:bottom-6" aria-live="polite">
         {items.map((t) => <ToastItem key={t.id} t={t} />)}
       </div>
     </Ctx.Provider>

@@ -12,8 +12,8 @@ export function PlaceholderProducts({ n = 4, cols = "grid-cols-2 lg:grid-cols-4"
         {Array.from({ length: n }, (_, i) => (
           <div key={i} className="tile flex flex-col p-4" aria-hidden>
             <div className="skeleton h-3.5 w-3/4" /><div className="skeleton mt-2 h-3 w-1/3" />
-            <div className="skeleton mt-3 aspect-square !rounded-[20px]" />
-            <div className="mt-4 flex items-center justify-between"><div className="skeleton h-5 w-16" /><div className="skeleton h-9 w-20 !rounded-full" /></div>
+            <div className="skeleton mt-3 aspect-square rounded-[20px]!" />
+            <div className="mt-4 flex items-center justify-between"><div className="skeleton h-5 w-16" /><div className="skeleton h-9 w-20 rounded-full!" /></div>
           </div>
         ))}
       </div>

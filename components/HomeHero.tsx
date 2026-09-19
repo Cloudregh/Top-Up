@@ -31,11 +31,11 @@ export function HomeHero() {
   return (
     <Pending waitingFor="settings: branches + opening hours">
       <section ref={root} className="gutter pt-4 sm:pt-6">
-        <div className="hero-soft relative h-[540px] overflow-hidden rounded-[30px] sm:h-[clamp(540px,46vw,780px)]">
+        <div className="hero-soft relative h-135 overflow-hidden rounded-[30px] sm:h-[clamp(540px,46vw,780px)]">
           {/* giant wordmark */}
-          <h1 className="pointer-events-none absolute left-[2.5%] top-[2%] z-10 select-none text-[clamp(3.4rem,14.8vw,16rem)] font-extrabold leading-[1] tracking-[-0.04em] text-white" aria-label="Pharmacy">
+          <h1 className="pointer-events-none absolute left-[2.5%] top-[2%] z-10 select-none text-[clamp(3.4rem,14.8vw,16rem)] font-extrabold leading-none tracking-[-0.04em] text-white" aria-label="Pharmacy">
             {"Pharmacy".split("").map((c, i) => (
-              <span key={i} data-charwrap className="relative -mb-[0.2em] -ml-[0.08em] -mr-[0.18em] inline-block overflow-hidden pb-[0.34em] pl-[0.08em] pr-[0.18em] align-top">
+              <span key={i} data-charwrap className="relative mb-[-0.2em] ml-[-0.08em] mr-[-0.18em] inline-block overflow-hidden pb-[0.34em] pl-[0.08em] pr-[0.18em] align-top">
                 <span data-char className="relative inline-block">{c}</span>
                 {i === 0 && <Star data-star className="absolute left-[0.35em] top-[0.335em] size-[0.13em] text-white" />}
               </span>
@@ -52,7 +52,7 @@ export function HomeHero() {
           </div>
 
           {/* info card */}
-          <div data-card className="absolute bottom-5 left-5 z-30 w-[200px] rounded-[22px] bg-white p-4 shadow-xl sm:bottom-[8%] sm:left-[3.5%] sm:w-[250px] sm:p-5">
+          <div data-card className="absolute bottom-5 left-5 z-30 w-50 rounded-[22px] bg-white p-4 shadow-xl sm:bottom-[8%] sm:left-[3.5%] sm:w-62.5 sm:p-5">
             <div className="flex items-center justify-between"><span className="text-sm font-semibold">Pharmacy hours</span><span className="rounded-full bg-[#dff1e4] px-3 py-1 text-xs font-bold text-leaf">Open</span></div>
             <div className="mt-3 flex items-center gap-2.5 text-xs">
               <span className="grid size-9 shrink-0 place-items-center rounded-full bg-mist"><span className="size-5 bg-brand" style={{ WebkitMask: "url(/logo-mark-v2.png) center / contain no-repeat", mask: "url(/logo-mark-v2.png) center / contain no-repeat" }} /></span>
@@ -65,7 +65,7 @@ export function HomeHero() {
           </div>
 
           {/* description + CTA */}
-          <div className="absolute left-5 top-[40%] z-30 max-w-[46%] space-y-4 sm:left-[3.5%] sm:top-[33%] sm:max-w-[250px] lg:left-[31%] lg:top-auto lg:bottom-[9%]">
+          <div className="absolute left-5 top-[40%] z-30 max-w-[46%] space-y-4 sm:left-[3.5%] sm:top-[33%] sm:max-w-62.5 lg:left-[31%] lg:top-auto lg:bottom-[9%]">
             <p data-hero-fade className="text-xs font-semibold leading-snug text-white [text-shadow:0_1px_8px_rgba(1,37,147,.35)] sm:text-[13px]">Quality healthcare products from a leading retail and wholesale pharmaceutical company whatever you need, 24/7.</p>
             <Link data-hero-fade href="/shop" className="btn btn-white shadow-md">Shop Now <ArrowUpRight size={15} /></Link>
           </div>

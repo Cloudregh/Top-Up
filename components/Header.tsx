@@ -51,18 +51,18 @@ export function Header() {
         </nav>
 
         <div className="ml-auto flex items-center gap-2 xl:ml-0">
-          <Link href="/appointment" className="btn btn-soft hidden whitespace-nowrap !py-3 md:inline-flex">Appointment <ArrowUpRight size={15} /></Link>
-          <button className="btn btn-soft !p-3" aria-label="Search products" onClick={() => router.push("/shop?focus=1")}><Search size={18} /></button>
-          <Link href="/cart" className="btn btn-soft relative !p-3" aria-label={`Cart, ${count} items`}>
+          <Link href="/appointment" className="btn btn-soft hidden whitespace-nowrap py-3! md:inline-flex">Appointment <ArrowUpRight size={15} /></Link>
+          <button className="btn btn-soft p-3!" aria-label="Search products" onClick={() => router.push("/shop?focus=1")}><Search size={18} /></button>
+          <Link href="/cart" className="btn btn-soft relative p-3!" aria-label={`Cart, ${count} items`}>
             <ShoppingBag size={18} />
             {count > 0 && <span ref={badge} className="absolute -right-1 -top-1 grid min-w-5 place-items-center rounded-full bg-sky px-1 text-[11px] font-bold text-white">{count}</span>}
           </Link>
           {status === "authed" ? (
-            <Link href="/account" className="btn btn-primary hidden whitespace-nowrap !py-3 lg:inline-flex"><User size={16} />{user?.name.split(" ")[0]}</Link>
+            <Link href="/account" className="btn btn-primary hidden whitespace-nowrap py-3! lg:inline-flex"><User size={16} />{user?.name.split(" ")[0]}</Link>
           ) : status === "guest" ? (
-            <Link href="/login" className="btn btn-primary hidden whitespace-nowrap !py-3 lg:inline-flex">Sign in</Link>
+            <Link href="/login" className="btn btn-primary hidden whitespace-nowrap py-3! lg:inline-flex">Sign in</Link>
           ) : <span className="skeleton hidden h-11 w-24 lg:block" />}
-          <button className="btn btn-soft !p-3 xl:hidden" aria-label="Menu" aria-expanded={open} onClick={() => setOpen((o) => !o)}>{open ? <X size={18} /> : <Menu size={18} />}</button>
+          <button className="btn btn-soft p-3! xl:hidden" aria-label="Menu" aria-expanded={open} onClick={() => setOpen((o) => !o)}>{open ? <X size={18} /> : <Menu size={18} />}</button>
         </div>
       </div>
 

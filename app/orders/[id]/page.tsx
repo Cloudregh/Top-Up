@@ -66,13 +66,13 @@ function Order({ id }: { id: string }) {
       <Link href="/orders" className="inline-flex items-center gap-2 text-sm font-semibold text-muted hover:text-ink"><ArrowLeft size={16} /> All orders</Link>
 
       {order.payment_status === "paid" && returning && (
-        <div role="status" className="card mt-4 flex items-center gap-4 !bg-emerald-50 p-6"><CheckCircle2 className="shrink-0 text-emerald-600" size={36} /><div><h2 className="text-xl font-bold">Thank you — payment received</h2><p className="text-sm text-emerald-900/80">Order #{shortId(order.id)} is confirmed. We&apos;ll start preparing it right away.</p></div></div>
+        <div role="status" className="card mt-4 flex items-center gap-4 bg-emerald-50! p-6"><CheckCircle2 className="shrink-0 text-emerald-600" size={36} /><div><h2 className="text-xl font-bold">Thank you — payment received</h2><p className="text-sm text-emerald-900/80">Order #{shortId(order.id)} is confirmed. We&apos;ll start preparing it right away.</p></div></div>
       )}
       {unpaid && poll === "checking" && (
-        <div role="status" className="card mt-4 flex items-center gap-4 !bg-sky-50 p-6"><Loader2 className="shrink-0 animate-spin text-sky-600" size={32} /><div><h2 className="font-bold">Confirming your payment…</h2><p className="text-sm text-sky-900/80">This usually takes a few seconds. Please don&apos;t pay again.</p></div></div>
+        <div role="status" className="card mt-4 flex items-center gap-4 bg-sky-50! p-6"><Loader2 className="shrink-0 animate-spin text-sky-600" size={32} /><div><h2 className="font-bold">Confirming your payment…</h2><p className="text-sm text-sky-900/80">This usually takes a few seconds. Please don&apos;t pay again.</p></div></div>
       )}
       {unpaid && poll === "gave-up" && (
-        <div role="alert" className="card mt-4 space-y-3 !bg-amber-50 p-6"><h2 className="flex items-center gap-2 font-bold"><AlertCircle size={20} /> We haven&apos;t received confirmation yet</h2>
+        <div role="alert" className="card mt-4 space-y-3 bg-amber-50! p-6"><h2 className="flex items-center gap-2 font-bold"><AlertCircle size={20} /> We haven&apos;t received confirmation yet</h2>
           <p className="text-sm text-amber-900/80">If you were charged, don&apos;t worry — it&apos;s reconciled automatically and this order will update to Paid. If you weren&apos;t charged, you can pay again below. Need certainty now? Tap <b>Need help?</b> and quote #{shortId(order.id)}.</p>
           <button className="btn btn-primary" onClick={() => { tries.current = 0; setPoll("checking"); }}><RefreshCw size={16} /> Check again</button></div>
       )}
@@ -112,7 +112,7 @@ function Order({ id }: { id: string }) {
           <section className="card space-y-3 p-6">
             {unpaid && <button className="btn btn-primary w-full" disabled={!!busy} onClick={() => act("pay")}>{busy === "pay" && <Loader2 size={16} className="animate-spin" />} Pay {ghs(order.total_pesewa)}</button>}
             {unpaid && poll === "idle" && <button className="btn btn-soft w-full" onClick={() => { tries.current = 0; setPoll("checking"); }}><RefreshCw size={16} /> I&apos;ve paid — check status</button>}
-            {order.status === "placed" && order.payment_status === "unpaid" && <button className="btn btn-soft w-full !text-rose-600" disabled={!!busy} onClick={() => act("cancel")}>{busy === "cancel" && <Loader2 size={16} className="animate-spin" />} Cancel order</button>}
+            {order.status === "placed" && order.payment_status === "unpaid" && <button className="btn btn-soft w-full text-rose-600!" disabled={!!busy} onClick={() => act("cancel")}>{busy === "cancel" && <Loader2 size={16} className="animate-spin" />} Cancel order</button>}
             {order.payment_status !== "unpaid" && !cancelled && <p className="flex gap-2 text-sm text-muted"><Headset size={16} className="mt-0.5 shrink-0" /> Paid orders can&apos;t be cancelled online. Tap <b>Need help?</b> and our team will sort a cancellation or refund.</p>}
             {order.payment_status === "refunded" && <p className="rounded-2xl bg-emerald-50 p-3 text-sm text-emerald-800">This order has been refunded.</p>}
           </section>

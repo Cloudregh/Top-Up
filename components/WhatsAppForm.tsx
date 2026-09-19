@@ -19,9 +19,9 @@ export function WhatsAppForm({ heading, fields, cta = "Send on WhatsApp" }: { he
         {fields.map((f) => (
           <div key={f.name} className={f.textarea ? "sm:col-span-2" : ""}>
             <label className="label" htmlFor={f.name}>{f.label}</label>
-            {f.options ? <select id={f.name} required className="input !bg-white" value={v[f.name] ?? ""} onChange={set(f.name)}><option value="" disabled>Select…</option>{f.options.map((o) => <option key={o}>{o}</option>)}</select>
-              : f.textarea ? <textarea id={f.name} className="input min-h-24 !bg-white" value={v[f.name] ?? ""} onChange={set(f.name)} />
-              : <input id={f.name} type={f.type ?? "text"} required className="input !bg-white" value={v[f.name] ?? ""} onChange={set(f.name)} />}
+            {f.options ? <select id={f.name} required className="input bg-white!" value={v[f.name] ?? ""} onChange={set(f.name)}><option value="" disabled>Select…</option>{f.options.map((o) => <option key={o}>{o}</option>)}</select>
+              : f.textarea ? <textarea id={f.name} className="input min-h-24 bg-white!" value={v[f.name] ?? ""} onChange={set(f.name)} />
+              : <input id={f.name} type={f.type ?? "text"} required className="input bg-white!" value={v[f.name] ?? ""} onChange={set(f.name)} />}
           </div>
         ))}
       </div>

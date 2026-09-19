@@ -34,7 +34,7 @@ export function ProductCard({ item }: { item: CatalogueItem }) {
       </Link>
       <div className="mt-auto flex flex-wrap items-center justify-between gap-x-2 gap-y-2 pt-4">
         <span className="text-lg font-bold tracking-tight">{ghs(item.price_pesewa)}</span>
-        <button className="btn btn-white !px-4 !py-2 text-xs" disabled={item.availability === "out_of_stock"} aria-label={`Add ${item.name} to cart`}
+        <button className="btn btn-white px-4! py-2! text-xs" disabled={item.availability === "out_of_stock"} aria-label={`Add ${item.name} to cart`}
           onClick={() => { add(item); setDone(true); toast(`${item.name} added`); setTimeout(() => setDone(false), 1200); }}>
           {done ? <Check size={14} /> : <ShoppingBag size={14} />}<span className="hidden min-[420px]:inline">{done ? "Added" : "Shop Now"}</span>
         </button>

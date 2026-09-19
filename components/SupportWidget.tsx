@@ -54,7 +54,7 @@ export function SupportWidget() {
   return (
     <>
       {open && (
-        <div ref={panel} data-lenis-prevent role="dialog" aria-label="Contact support" className="fixed bottom-24 right-3 z-[60] max-h-[calc(100dvh-7rem)] w-[calc(100vw-1.5rem)] max-w-sm overflow-y-auto overscroll-contain rounded-[28px] bg-white shadow-2xl ring-1 ring-black/5 sm:bottom-24 sm:right-6">
+        <div ref={panel} data-lenis-prevent role="dialog" aria-label="Contact support" className="fixed bottom-24 right-3 z-60 max-h-[calc(100dvh-7rem)] w-[calc(100vw-1.5rem)] max-w-sm overflow-y-auto overscroll-contain rounded-[28px] bg-white shadow-2xl ring-1 ring-black/5 sm:bottom-24 sm:right-6">
           <div className="hero-gradient flex items-center gap-3 px-5 py-4">
             <span className="relative grid size-11 place-items-center rounded-full bg-white text-brand"><Headset size={20} /><span className="absolute -right-0.5 -top-0.5 size-3 rounded-full border-2 border-white bg-emerald-500" /></span>
             <div className="flex-1"><p className="font-bold leading-tight text-white">Customer support</p><p className="text-xs text-white/80">Online 24/7 · replies right away</p></div>
@@ -69,19 +69,19 @@ export function SupportWidget() {
               {TOPICS.map((t) => <button key={t} onClick={() => wa(`I need help: ${t}.`)} className="rounded-full border border-peri px-3 py-1.5 text-xs font-semibold hover:bg-mist">{t}</button>)}
             </div>
             <form data-pop onSubmit={(e) => { e.preventDefault(); if (msg.trim()) { wa(msg.trim()); setMsg(""); } }} className="flex gap-2">
-              <input value={msg} onChange={(e) => setMsg(e.target.value)} className="input !py-3" placeholder="Type your message…" aria-label="Your message" />
-              <button className="btn btn-primary !px-4" aria-label="Send on WhatsApp"><Send size={16} /></button>
+              <input value={msg} onChange={(e) => setMsg(e.target.value)} className="input py-3!" placeholder="Type your message…" aria-label="Your message" />
+              <button className="btn btn-primary px-4!" aria-label="Send on WhatsApp"><Send size={16} /></button>
             </form>
             <div data-pop className="grid grid-cols-2 gap-2">
-              <a href={`https://wa.me/${SUPPORT.whatsapp}`} target="_blank" rel="noopener" className="btn bg-[#25D366] !py-2.5 text-white"><MessageCircle size={16} /> WhatsApp</a>
-              <a href={`tel:+${SUPPORT.phone}`} className="btn btn-soft !py-2.5"><Phone size={16} /> Call now</a>
+              <a href={`https://wa.me/${SUPPORT.whatsapp}`} target="_blank" rel="noopener" className="btn bg-[#25D366] py-2.5! text-white"><MessageCircle size={16} /> WhatsApp</a>
+              <a href={`tel:+${SUPPORT.phone}`} className="btn btn-soft py-2.5!"><Phone size={16} /> Call now</a>
             </div>
             <p data-pop className="text-center text-xs text-muted">Hotline {pretty(SUPPORT.phone)} · {pretty(SUPPORT.phone2)}</p>
           </div>
         </div>
       )}
       <button ref={fab} onClick={() => setOpen((o) => !o)} aria-label={open ? "Close support" : "Contact support"} aria-expanded={open}
-        className="fixed bottom-5 right-3 z-[60] flex items-center gap-2 rounded-full bg-deep px-5 py-4 font-semibold text-white shadow-2xl transition hover:bg-sky sm:right-6">
+        className="fixed bottom-5 right-3 z-60 flex items-center gap-2 rounded-full bg-deep px-5 py-4 font-semibold text-white shadow-2xl transition hover:bg-sky sm:right-6">
         {open ? <X size={20} /> : <Headset size={20} />}<span className="hidden sm:inline">{open ? "Close" : "Need help?"}</span>
       </button>
     </>

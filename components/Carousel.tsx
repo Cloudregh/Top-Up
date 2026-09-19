@@ -8,7 +8,7 @@ export function Carousel({ children, itemClass = "w-[72%] sm:w-[38%] lg:w-[24%]"
   const go = (d: number) => ref.current?.scrollBy({ left: d * (ref.current.clientWidth * 0.8), behavior: "smooth" });
   return (
     <div>
-      <div ref={ref} className="hide-scroll -mx-[var(--g)] flex snap-x snap-mandatory gap-4 overflow-x-auto px-[var(--g)] pb-2" data-lenis-prevent-wheel>
+      <div ref={ref} className="hide-scroll -mx-(--g) flex snap-x snap-mandatory gap-4 overflow-x-auto px-(--g) pb-2" data-lenis-prevent-wheel>
         {Array.isArray(children) ? children.map((c, i) => <div key={i} className={`shrink-0 snap-start ${itemClass}`}>{c}</div>) : <div className={`shrink-0 snap-start ${itemClass}`}>{children}</div>}
       </div>
       {arrows && (
