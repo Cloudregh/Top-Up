@@ -25,8 +25,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <CartProvider>
             <ToastProvider>
               <SmoothScroll />
-              <Header />
-              <main>{children}</main>
+              <div className="sheet">
+                <Header />
+                <main className="pb-16">{children}</main>
+              </div>
               <Footer />
               <SupportWidget />
             </ToastProvider>

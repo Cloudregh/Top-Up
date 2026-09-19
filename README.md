@@ -11,6 +11,18 @@ npm run dev                  # http://localhost:3000
 
 Set `NEXT_PUBLIC_DEMO=1` to run the whole customer flow against an in-browser mock (any email/password logs in).
 
+## Images (Pexels now, Cloudinary later)
+All imagery goes through `lib/images.ts` (`img(key, w, h)`). Every key currently points at a Pexels placeholder.
+To switch: upload each asset to Cloudinary with public id `topup/<key>` (keys listed in `IMAGE_KEYS`, e.g. `topup/hero`,
+`topup/cat_cough`, `topup/delivery`), then set `NEXT_PUBLIC_IMAGE_SOURCE=cloudinary` and `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`.
+Tip: the hero portrait uses `mix-blend-multiply`; a background-removed PNG (Cloudinary `e_background_removal`) will look cleaner.
+Product photos are placeholders by product type (`productImageKey`) — replace with per-product images once the API serves them.
+
+## Site structure (from top-uppharmacy.com)
+Home · About (About Us, Why Choose Us, FAQ's) · Services · Health Hub (Prescriptions, Book Appointment, Corporate Health, Travel Health) ·
+News · Careers · Contact · Shop. Enquiry forms (appointment, corporate, travel, careers, contact) open WhatsApp prefilled — no forms backend yet.
+Copy on Corporate/Travel Health and Careers is placeholder: replace with Top-Up's real wording.
+
 ## Screens
 Home · Shop (search, category, cursor pagination) · Product · Cart (live stock/price re-check) · Checkout (delivery/pickup,
 prescription, Paystack) · Order detail (timeline, payment polling, cancel) · Orders (+reorder) · Prescriptions ·

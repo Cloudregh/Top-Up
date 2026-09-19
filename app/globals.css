@@ -24,12 +24,12 @@
 
 body {
   overflow-x: clip;
-  background: linear-gradient(180deg, #e6eafb 0%, #f4f5fc 40%, #fbf6f9 100%) fixed;
+  background: #e7ebfa;
   color: var(--ink);
   font-family: var(--font-jakarta), system-ui, sans-serif;
 }
 
-.card { background: #fff; border-radius: 28px; box-shadow: 0 10px 40px -18px rgba(47, 63, 184, 0.25); }
+.card { background: #fff; border-radius: 28px; border: 1px solid #eceffa; box-shadow: 0 10px 40px -22px rgba(47, 63, 184, 0.25); }
 .hero-gradient { background: linear-gradient(120deg, #b5c1ee 0%, #cdbfea 45%, #f4d7e3 100%); }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; border-radius: 9999px; padding: .75rem 1.4rem; font-weight: 600; font-size: .9rem; transition: transform .2s, background .2s, opacity .2s; cursor: pointer; }
 .btn:active { transform: scale(.97); }
@@ -46,3 +46,16 @@ body {
 .skeleton { background: linear-gradient(90deg, #eceffa 25%, #f6f7fd 50%, #eceffa 75%); background-size: 200% 100%; animation: sh 1.3s infinite; border-radius: 16px; }
 @keyframes sh { to { background-position: -200% 0; } }
 @media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } }
+
+.sheet { background: linear-gradient(180deg, #ffffff 0%, #fafbff 100%); border-radius: 40px; margin: 12px auto 0; max-width: 1360px; box-shadow: 0 30px 80px -40px rgba(47, 63, 184, .35); }
+@media (max-width: 640px) { .sheet { border-radius: 28px; margin: 8px 8px 0; } }
+.tile { background: #f5f6fb; border-radius: 28px; }
+.wordmark { background: linear-gradient(90deg, #a9b6ea 0%, #d6c3ea 55%, #f4d7e3 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.dot::before { content: ""; display: inline-block; width: 4px; height: 4px; border-radius: 9999px; background: currentColor; margin-right: 8px; vertical-align: middle; }
+.hide-scroll { scrollbar-width: none; } .hide-scroll::-webkit-scrollbar { display: none; }
+
+.hero-person {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 38%), linear-gradient(to bottom, transparent 0%, #000 16%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 38%), linear-gradient(to bottom, transparent 0%, #000 16%);
+  -webkit-mask-composite: source-in; mask-composite: intersect;
+}
