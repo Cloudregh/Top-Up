@@ -38,17 +38,21 @@ export function HomeHero() {
       <section ref={root} className="gutter pt-4 sm:pt-6">
         <div className="hero-soft relative h-130 overflow-hidden rounded-[30px] sm:h-[clamp(540px,46vw,780px)]">
           {/* giant wordmark */}
-          <h1 className="pointer-events-none absolute left-[3%] top-[2.5%] z-10 select-none whitespace-nowrap text-[17.5vw] sm:left-[2.5%] sm:top-[2%] sm:text-[clamp(3.4rem,14.8vw,16rem)] font-extrabold leading-none tracking-[-0.04em] text-white" aria-label="Pharmacy">
-            {"Pharmacy".split("").map((c, i) => (
-              <span key={i} data-charwrap className="relative mb-[-0.2em] ml-[-0.08em] mr-[-0.18em] inline-block overflow-hidden pb-[0.34em] pl-[0.08em] pr-[0.18em] align-top">
-                <span data-char className="relative inline-block">{c}</span>
-                {i === 0 && <Star data-star className="absolute left-[0.35em] top-[0.335em] size-[0.13em] text-white" />}
+          <h1 className="pointer-events-none absolute left-[3%] top-[2.5%] z-10 select-none whitespace-nowrap text-[17.5vw] font-extrabold leading-[0.92] tracking-[-0.04em] text-white sm:left-[2.5%] sm:top-[2%] sm:text-[clamp(3.4rem,11vw,12rem)]" aria-label="Top-Up Pharmacy">
+            {["Top-Up", "Pharmacy"].map((word, w) => (
+              <span key={word} className="block" aria-hidden>
+                {word.split("").map((c, i) => (
+                  <span key={i} data-charwrap className="relative mb-[-0.2em] ml-[-0.08em] mr-[-0.18em] inline-block overflow-hidden pb-[0.34em] pl-[0.08em] pr-[0.18em] align-top">
+                    <span data-char className="relative inline-block">{c}</span>
+                    {w === 1 && i === 0 && <Star data-star className="absolute left-[0.35em] top-[0.335em] size-[0.13em] text-white" />}
+                  </span>
+                ))}
               </span>
             ))}
           </h1>
 
           {/* Top-Up mark as the translucent brand shape */}
-          <div data-mark aria-hidden className="absolute right-[-6%] top-[17%] z-0 aspect-square w-[44%] bg-white/45 sm:right-[3%] sm:top-[5%] sm:w-[19%]"
+          <div data-mark aria-hidden className="absolute left-[76%] top-[2.5%] z-0 aspect-square w-[20%] bg-white/45 sm:left-[49%] sm:top-[4%] sm:w-[17%]"
             style={{ WebkitMask: "url(/logo-mark-v2.png) center / contain no-repeat", mask: "url(/logo-mark-v2.png) center / contain no-repeat" }} />
 
           {/* person (cut-out) overlaps the wordmark */}
@@ -70,7 +74,7 @@ export function HomeHero() {
           </div>
 
           {/* description + CTA */}
-          <div className="absolute left-4 top-[29%] z-30 max-w-[45%] space-y-3 sm:left-[3.5%] sm:space-y-4 sm:top-[33%] sm:max-w-62.5 lg:left-[31%] lg:top-auto lg:bottom-[9%]">
+          <div className="absolute left-4 top-[40%] z-30 max-w-[45%] space-y-3 sm:left-[3.5%] sm:space-y-4 sm:top-[33%] sm:max-w-62.5 lg:left-[31%] lg:top-auto lg:bottom-[9%]">
             <p data-hero-fade className="text-[11px] font-semibold leading-snug text-white [text-shadow:0_1px_8px_rgba(1,37,147,.35)] sm:text-[13px]">Quality healthcare products from a leading retail and wholesale pharmaceutical company whatever you need, 24/7.</p>
             <Link data-hero-fade href="/shop" className="btn btn-white px-5 py-2.5 text-[13px] shadow-md sm:px-[1.4rem] sm:py-3 sm:text-sm">Shop Now <ArrowUpRight size={15} /></Link>
           </div>

@@ -64,3 +64,15 @@ body {
 }
 
 @keyframes sh { to { background-position: -200% 0; } }
+
+/* Insurer logo marquee: two identical tracks, each slides one full width */
+.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
+.marquee-row { display: flex; width: max-content; animation: marquee 35s linear infinite; }
+.marquee:hover .marquee-row, .marquee:focus-within .marquee-row { animation-play-state: paused; }
+.marquee-track { display: flex; flex-shrink: 0; gap: 16px; padding-right: 16px; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .marquee { -webkit-mask-image: none; mask-image: none; overflow-x: auto; }
+  .marquee-row { animation: none; }
+  .marquee-track[aria-hidden="true"] { display: none; }
+}

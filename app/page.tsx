@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { ArrowUpRight, Clock, Search, FileText, Stethoscope } from "lucide-react";
+import { ArrowUpRight, Clock, FileText, Stethoscope } from "lucide-react";
 import { HomeHero } from "@/components/HomeHero";
 import { Reveal } from "@/components/Reveal";
 import { Img } from "@/components/Img";
@@ -18,7 +17,8 @@ import { useAuth } from "@/components/AuthProvider";
 import { useCart } from "@/components/CartProvider";
 import { useToast } from "@/components/Toast";
 import { useCatalogue, useFetch } from "@/lib/hooks";
-import { AWARDS, CAMPAIGNS, FAQS, INSURERS, SERVICES } from "@/lib/site";
+import { AWARDS, CAMPAIGNS, FAQS, SERVICES } from "@/lib/site";
+import { InsurerLogos } from "@/components/InsurerLogos";
 import type { CatalogueItem, CustomerOrder, Page } from "@/lib/types";
 
 const H2 = "text-3xl font-semibold leading-tight tracking-tight sm:text-5xl";
@@ -34,30 +34,12 @@ function Grid({ items, loading, error, retry, gated, n }: { items: CatalogueItem
 
 export default function HomePage() {
   const { status } = useAuth();
-  const router = useRouter();
   const cat = useCatalogue("", "", 16);
   const { featured: offer, popular: sellers } = pickSections(cat.items);
 
   return (
     <>
       <HomeHero />
-
-      {/* Search + account CTAs */}
-      <section className="gutter mt-8">
-        <Reveal className="flex flex-col gap-3 md:flex-row md:items-center">
-          <form role="search" onSubmit={(e) => { e.preventDefault(); const q = new FormData(e.currentTarget).get("q")?.toString().trim(); router.push(q ? `/shop?q=${encodeURIComponent(q)}` : "/shop"); }} className="tile flex flex-1 items-center gap-3 px-5 py-2.5">
-            <Search size={20} className="text-muted" />
-            <input name="q" aria-label="Search medicines" placeholder="Search medicines, brands, health needs…" className="w-full bg-transparent py-2 outline-none" />
-            <button className="btn btn-primary px-5! py-2.5!">Search</button>
-          </form>
-          {status === "guest" && (
-            <div className="flex gap-2">
-              <Link href="/login" className="btn btn-primary flex-1 md:flex-none">Sign in</Link>
-              <Link href="/register" className="btn btn-soft flex-1 md:flex-none">Create business account</Link>
-            </div>
-          )}
-        </Reveal>
-      </section>
 
       {status === "authed" && <ReorderUsuals />}
 
@@ -119,7 +101,7 @@ export default function HomePage() {
             <div key={s.t} className="tile p-5 transition hover:-translate-y-1"><span className="grid size-10 place-items-center rounded-full bg-white text-brand"><Stethoscope size={18} /></span><h3 className="mt-4 text-sm font-semibold">{s.t}</h3><p className="mt-1 text-xs leading-relaxed text-muted">{s.d}</p></div>
           ))}
         </Reveal>
-        <Reveal className="mt-10 text-center"><p className="text-sm font-semibold">Insurance partners</p><div className="mt-4 flex flex-wrap justify-center gap-2">{INSURERS.map((i) => <span key={i} className="rounded-full bg-mist px-4 py-2 text-xs font-semibold">{i}</span>)}</div></Reveal>
+        <Reveal className="mt-10 text-center"><p className="text-sm font-semibold">Insurance partners</p><InsurerLogos /></Reveal>
       </section></Pending>
 
       {/* Awards (Mecura reviews row) */}

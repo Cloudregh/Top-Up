@@ -20,7 +20,17 @@ export const SERVICES = [
   { t: "Cosmetology", d: "Skin and beauty care at the branch." },
 ] as const;
 
-export const INSURERS = ["GLICO", "Metropolitan Health Insurance", "Phoenix Insurance", "Ace Medical Insurance", "Premier Health Insurance", "Acacia Health Insurance", "GHIC"];
+// logo: file in /public/images/insurers. Missing logo => name plate. Add the file + set `logo` to swap in.
+export interface Insurer { name: string; logo?: string; bg?: string }
+export const INSURERS: Insurer[] = [
+  { name: "GLICO Health", logo: "/images/insurers/glico.png" },
+  { name: "Metropolitan Health Insurance", logo: "/images/insurers/metropolitan.png" },
+  { name: "Phoenix Insurance", logo: "/images/insurers/phoenix.png" },
+  { name: "Ace Medical Insurance", logo: "/images/insurers/ace.png" },
+  { name: "Premier Health Insurance", logo: "/images/insurers/premier.png" },
+  { name: "Acacia Health Insurance", logo: "/images/insurers/acacia.png", bg: "#722fa0" },
+  { name: "GHIC (GAB Health)", logo: "/images/insurers/ghic.svg" },
+];
 
 export interface Award { t: string; by: string; img: string; pos?: string }
 export const AWARDS: Award[] = [
