@@ -7,7 +7,7 @@ import { useAuth } from "@/components/AuthProvider";
 import { ErrorState, Skeleton } from "@/components/States";
 import { useToast } from "@/components/Toast";
 import { api, errInfo } from "@/lib/api";
-import { useFetch, useRequireAuth } from "@/lib/hooks";
+import { setSuppressAuthRedirect, useFetch, useRequireAuth } from "@/lib/hooks";
 import { Pending } from "@/components/Pending";
 import { addresses, notifPrefs } from "@/lib/local";
 import { fmtDate, ghs } from "@/lib/format";
@@ -51,7 +51,7 @@ export default function AccountPage() {
     <div className="container-x space-y-6 py-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div><h1 className="text-4xl font-bold tracking-tight sm:text-5xl">{user.name}</h1><p className="text-muted">{user.email}</p></div>
-        <button className="btn btn-soft" onClick={async () => { await logout(); router.replace("/"); }}><LogOut size={16} /> Sign out</button>
+        <button className="btn btn-soft" onClick={async () => { setSuppressAuthRedirect(true); await logout(); router.replace("/"); setTimeout(() => setSuppressAuthRedirect(false), 1500); }}><LogOut size={16} /> Sign out</button>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">

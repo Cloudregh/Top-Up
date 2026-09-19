@@ -5,12 +5,16 @@ import { api, errInfo } from "./api";
 import type { CatalogueItem, Page } from "./types";
 import { useAuth } from "@/components/AuthProvider";
 
+let suppressAuthRedirect = false;
+/** Set while signing out so protected pages don't bounce to /login on the way home. */
+export const setSuppressAuthRedirect = (v: boolean) => { suppressAuthRedirect = v; };
+
 /** Redirects guests to /login?next=… and reports when it's safe to fetch. */
 export function useRequireAuth() {
   const { status } = useAuth();
   const router = useRouter();
   const path = usePathname();
-  useEffect(() => { if (status === "guest") router.replace(`/login?next=${encodeURIComponent(path)}`); }, [status, router, path]);
+  useEffect(() => { if (status === "guest" && !suppressAuthRedirect) router.replace(`/login?next=${encodeURIComponent(path)}`); }, [status, router, path]);
   return status === "authed";
 }
 

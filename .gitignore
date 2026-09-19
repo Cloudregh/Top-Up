@@ -42,3 +42,4 @@ next-env.d.ts
 
 # alternate build dir for checks
 /.next-check
+/.next-demo

@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import { ArrowUpRight, Clock, FileText, Stethoscope } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ArrowUpRight, Clock, Search, FileText, Stethoscope } from "lucide-react";
 import { HomeHero } from "@/components/HomeHero";
 import { Reveal } from "@/components/Reveal";
 import { Img } from "@/components/Img";
@@ -33,12 +34,30 @@ function Grid({ items, loading, error, retry, gated, n }: { items: CatalogueItem
 
 export default function HomePage() {
   const { status } = useAuth();
+  const router = useRouter();
   const cat = useCatalogue("", "", 16);
   const { featured: offer, popular: sellers } = pickSections(cat.items);
 
   return (
     <>
       <HomeHero />
+
+      {/* Search + account CTAs */}
+      <section className="gutter mt-8">
+        <Reveal className="flex flex-col gap-3 md:flex-row md:items-center">
+          <form role="search" onSubmit={(e) => { e.preventDefault(); const q = new FormData(e.currentTarget).get("q")?.toString().trim(); router.push(q ? `/shop?q=${encodeURIComponent(q)}` : "/shop"); }} className="tile flex flex-1 items-center gap-3 px-5 py-2.5">
+            <Search size={20} className="text-muted" />
+            <input name="q" aria-label="Search medicines" placeholder="Search medicines, brands, health needs…" className="w-full bg-transparent py-2 outline-none" />
+            <button className="btn btn-primary px-5! py-2.5!">Search</button>
+          </form>
+          {status === "guest" && (
+            <div className="flex gap-2">
+              <Link href="/login" className="btn btn-primary flex-1 md:flex-none">Sign in</Link>
+              <Link href="/register" className="btn btn-soft flex-1 md:flex-none">Create business account</Link>
+            </div>
+          )}
+        </Reveal>
+      </section>
 
       {status === "authed" && <ReorderUsuals />}
 

@@ -6,7 +6,7 @@ import { Building2, CreditCard, FileText, Loader2, Lock, MapPin, ShieldAlert, Tr
 import { useCart } from "@/components/CartProvider";
 import { Empty } from "@/components/States";
 import { api, errInfo, newKey } from "@/lib/api";
-import { BRANCHES, fulfilment, prescriptionIds } from "@/lib/local";
+import { BRANCHES, fulfilPref, fulfilment, prescriptionIds } from "@/lib/local";
 import { startPayment } from "@/lib/orders";
 import { useRequireAuth } from "@/lib/hooks";
 import { Pending } from "@/components/Pending";
@@ -33,6 +33,9 @@ export default function CheckoutPage() {
   const [failedOrder, setFailedOrder] = useState<string | null>(null);
   // Stable keys per checkout attempt so a double-click / retry never double-orders or double-charges.
   const orderKey = useRef(newKey()); const payKey = useRef(newKey()); const orderId = useRef<string | null>(null);
+
+  useEffect(() => { const f = fulfilPref.get(); setMode(f.mode); setAddress(f.address); setBranch(f.branch); setPhone(f.phone); }, []);
+  useEffect(() => { fulfilPref.set({ mode, address, branch, phone }); }, [mode, address, branch, phone]);
 
   const needsRx = lines.some((l) => l.requires_prescription);
   const sig = useMemo(() => JSON.stringify([lines.map((l) => [l.product_id, l.quantity]), rx]), [lines, rx]);

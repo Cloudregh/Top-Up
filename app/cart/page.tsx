@@ -8,6 +8,7 @@ import { useCart } from "@/components/CartProvider";
 import { ProductImage } from "@/components/ProductImage";
 import { AVAIL } from "@/components/ProductCard";
 import { Empty, Skeleton } from "@/components/States";
+import { FulfilmentPicker } from "@/components/FulfilmentPicker";
 import { api } from "@/lib/api";
 import { ghs } from "@/lib/format";
 import { useState } from "react";
@@ -43,6 +44,7 @@ export default function CartPage() {
     <div className="container-x py-8">
       <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Your cart <span className="text-muted">({count})</span></h1>
       <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_360px]">
+        <div className="space-y-6">
         <ul className="space-y-3">
           {lines.map((l) => {
             const a = avail[l.product_id];
@@ -71,6 +73,8 @@ export default function CartPage() {
             );
           })}
         </ul>
+        <FulfilmentPicker />
+        </div>
         <aside className="card h-fit space-y-4 p-6 lg:sticky lg:top-28">
           <h2 className="text-lg font-bold">Summary</h2>
           <div className="flex justify-between text-sm"><span className="text-muted">Subtotal</span><span>{ghs(total)}</span></div>

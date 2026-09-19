@@ -11,6 +11,11 @@ export const fulfilment = {
   get: (orderId: string) => read<Fulfilment | null>(`topup.ful.${orderId}`, null),
   set: (orderId: string, f: Fulfilment) => write(`topup.ful.${orderId}`, f),
 };
+export interface FulfilPref { mode: "delivery" | "pickup"; address: string; branch: string; phone: string }
+export const fulfilPref = {
+  get: (): FulfilPref => read<FulfilPref>("topup.fulpref", { mode: "delivery", address: "", branch: BRANCHES[0], phone: "" }),
+  set: (p: FulfilPref) => write("topup.fulpref", p),
+};
 export const addresses = { get: () => read<string[]>("topup.addr", []), set: (a: string[]) => write("topup.addr", a) };
 export const notifPrefs = {
   get: () => read("topup.notif", { orderUpdates: true, prescriptionUpdates: true, promotions: false }),
