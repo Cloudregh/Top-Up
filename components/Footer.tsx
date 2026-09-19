@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { SUPPORT, pretty } from "@/lib/format";
 import { Logo } from "./Logo";
 
@@ -13,7 +13,7 @@ export function Footer() {
   return (
     <footer className="mt-10 overflow-hidden bg-mist pb-24 sm:pb-0">
       <div className="gutter pt-14">
-        <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)_1.3fr]">
+        <div className="relative z-10 grid gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)_1.3fr]">
           <div className="space-y-4">
             <Logo size={48} tagline />
             <p className="max-w-65 text-sm text-muted">One of the best pharmacies in Ghana — a leading retail and wholesale pharmaceutical company with branches in Tema, Accra and Kumasi.</p>
@@ -25,13 +25,14 @@ export function Footer() {
             <p className="mb-4 text-sm font-bold">Contact</p>
             <ul className="space-y-2.5 text-sm text-muted">
               <li className="flex gap-2"><Clock size={15} className="mt-0.5 shrink-0" /> Open 24/7</li>
-              <li className="flex gap-2"><Phone size={15} className="mt-0.5 shrink-0" /><span>{pretty(SUPPORT.phone)}<br />{pretty(SUPPORT.phone2)}</span></li>
-              <li className="flex gap-2"><MapPin size={15} className="mt-0.5 shrink-0" /> Sena House, Hospital Road, Community 9, Tema</li>
-              {SUPPORT.email && <li className="flex gap-2"><Mail size={15} className="mt-0.5 shrink-0" />{SUPPORT.email}</li>}
+              <li className="flex gap-2"><Phone size={15} className="mt-0.5 shrink-0" /><span className="flex flex-col"><a href={`tel:+${SUPPORT.phone}`} className="hover:text-ink">{pretty(SUPPORT.phone)}</a><a href={`tel:+${SUPPORT.phone2}`} className="hover:text-ink">{pretty(SUPPORT.phone2)}</a></span></li>
+              <li className="flex gap-2"><MessageCircle size={15} className="mt-0.5 shrink-0" /><a href={`https://wa.me/${SUPPORT.whatsapp}`} target="_blank" rel="noopener" className="hover:text-ink">Chat on WhatsApp</a></li>
+              <li className="flex gap-2"><MapPin size={15} className="mt-0.5 shrink-0" /><a href="https://www.google.com/maps/search/?api=1&query=Sena+House+Hospital+Road+Community+9+Tema+Ghana" target="_blank" rel="noopener" className="hover:text-ink">Sena House, Hospital Road, Community 9, Tema</a></li>
+              {SUPPORT.email && <li className="flex gap-2"><Mail size={15} className="mt-0.5 shrink-0" /><a href={`mailto:${SUPPORT.email}`} className="hover:text-ink">{SUPPORT.email}</a></li>}
             </ul>
           </div>
         </div>
-        <p className="wordmark mt-10 select-none text-center text-[clamp(4.5rem,21vw,20rem)] font-extrabold leading-[0.85] tracking-tighter" aria-hidden>Top-Up</p>
+        <p className="wordmark pointer-events-none relative z-0 mt-10 select-none text-center text-[clamp(4.5rem,21vw,20rem)] font-extrabold leading-[0.85] tracking-tighter" aria-hidden>Top-Up</p>
       </div>
       <div className="gutter flex flex-wrap justify-between gap-2 border-t border-[#d5e6f8] bg-white py-5 text-xs text-muted">
         <span>© {new Date().getFullYear()} Top-Up Pharmacy. All Rights Reserved.</span>
