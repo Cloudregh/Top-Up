@@ -7,7 +7,7 @@ import type { ImgKey } from "@/lib/images";
 
 export function InfoHero({ eyebrow, title, intro, image }: { eyebrow: string; title: string; intro: string; image?: ImgKey }) {
   return (
-    <section className="gutter">
+    <section className="gutter pt-4 sm:pt-6">
       <div className="hero-gradient relative flex min-h-[320px] items-end overflow-hidden rounded-[30px] p-8 sm:min-h-[380px] sm:p-12">
         {image && <Img k={image} w={1000} h={700} alt="" priority className="absolute inset-y-0 right-0 hidden h-full w-[42%] object-cover sm:block" style={{ maskImage: "linear-gradient(to right, transparent, #000 40%)", WebkitMaskImage: "linear-gradient(to right, transparent, #000 40%)" }} />}
         <div className="relative z-10 max-w-xl">

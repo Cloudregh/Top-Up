@@ -30,14 +30,14 @@ export function HomeHero() {
 
   return (
     <Pending waitingFor="settings: branches + opening hours">
-      <section ref={root} className="gutter">
+      <section ref={root} className="gutter pt-4 sm:pt-6">
         <div className="hero-soft relative h-[540px] overflow-hidden rounded-[30px] sm:h-[clamp(540px,46vw,780px)]">
           {/* giant wordmark */}
           <h1 className="pointer-events-none absolute left-[2.5%] top-[2%] z-10 select-none text-[clamp(3.4rem,14.8vw,16rem)] font-extrabold leading-[1] tracking-[-0.07em] text-white" aria-label="Pharmacy">
             {"Pharmacy".split("").map((c, i) => (
-              <span key={i} className="relative inline-block overflow-hidden pb-[0.14em] align-top">
+              <span key={i} className="relative -mb-[0.2em] inline-block overflow-hidden pb-[0.34em] align-top">
                 <span data-char className="relative inline-block">{c}</span>
-                {i === 0 && <Star data-star className="absolute left-[40%] top-[28%] size-[0.19em] text-white" />}
+                {i === 0 && <Star data-star className="absolute left-[0.27em] top-[0.335em] size-[0.13em] text-white" />}
               </span>
             ))}
           </h1>
@@ -47,8 +47,8 @@ export function HomeHero() {
             style={{ WebkitMask: "url(/logo-mark-v2.png) center / contain no-repeat", mask: "url(/logo-mark-v2.png) center / contain no-repeat" }} />
 
           {/* person (cut-out) overlaps the wordmark */}
-          <div data-person className="absolute bottom-0 right-[-10%] z-20 aspect-[834/909] h-[62%] sm:right-[1%] sm:h-[72%] lg:h-[84%]">
-            <Img k="hero_cutout" w={1000} priority alt="Top-Up pharmacist" className="size-full object-contain object-bottom drop-shadow-[0_20px_30px_rgba(1,37,147,0.18)]" />
+          <div data-person className="absolute bottom-0 right-[-10%] z-20 h-[62%] sm:right-[1%] sm:h-[72%] lg:h-[84%]">
+            <Img k="hero_cutout" w={1000} priority alt="Top-Up pharmacist" className="h-full w-auto max-w-none object-contain object-bottom drop-shadow-[0_20px_30px_rgba(1,37,147,0.18)]" />
           </div>
 
           {/* info card */}
