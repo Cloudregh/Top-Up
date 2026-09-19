@@ -15,7 +15,7 @@ import { useAuth } from "@/components/AuthProvider";
 import { useCart } from "@/components/CartProvider";
 import { useToast } from "@/components/Toast";
 import { useCatalogue, useFetch } from "@/lib/hooks";
-import { AWARDS, FAQS, INSURERS, SERVICES } from "@/lib/site";
+import { AWARDS, CAMPAIGNS, FAQS, INSURERS, SERVICES } from "@/lib/site";
 import type { CatalogueItem, CustomerOrder, Page } from "@/lib/types";
 
 const H2 = "text-3xl font-semibold leading-tight tracking-tight sm:text-5xl";
@@ -53,19 +53,15 @@ export default function HomePage() {
       </section>
 
       {/* Campaigns (Mecura "Seasonal Exclusive Solutions") */}
-      <Pending waitingFor="CMS: campaigns / promotions"><section className="mt-24 gutter">
+      <Pending waitingFor="CMS: campaigns / promotions"><section id="campaigns" className="mt-24 scroll-mt-24 gutter">
         <Reveal><h2 className={`${H2} text-center`}>Health Campaigns<br />&amp; Everyday Solutions</h2></Reveal>
         <Reveal stagger={0.1} className="mt-10 grid gap-4 md:grid-cols-3">
-          {[
-            { t: "Kick that cough away", s: "Cough, cold & flu care", k: "cat_cough", q: "cough" },
-            { t: "Fast pain relief", s: "Headache, body & muscle pain", k: "season_pain", q: "pain" },
-            { t: "Early detection saves lives", s: "Breast Cancer Awareness Month — mammograms catch it early", k: "season_early", q: "" },
-          ].map((c) => (
-            <Link key={c.t} href={c.q ? `/shop?q=${c.q}` : "/appointment"} className="group relative block aspect-[4/5] overflow-hidden rounded-[28px] md:aspect-[3/4]">
-              <Img k={c.k as "cat_cough"} w={700} h={900} alt={c.t} className="absolute inset-0 size-full object-cover transition duration-700 group-hover:scale-105" />
+          {CAMPAIGNS.map((c) => (
+            <Link key={c.slug} href={`/health/${c.slug}`} className="group relative block aspect-[4/5] overflow-hidden rounded-[28px] md:aspect-[3/4]" aria-label={`${c.title} — see more`}>
+              <Img k={c.img} w={700} h={900} alt="" className="absolute inset-0 size-full object-cover transition duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-b from-[#012060]/65 via-[#012060]/5 to-[#012060]/75" />
-              <div className="absolute inset-x-0 top-0 p-5"><p className="max-w-[12rem] text-lg font-semibold leading-tight text-white drop-shadow">{c.t}</p></div>
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5"><p className="max-w-[12rem] text-xs text-white/90">{c.s}</p><span className="btn btn-white !px-4 !py-2 text-xs">See more <ArrowUpRight size={13} /></span></div>
+              <div className="absolute inset-x-0 top-0 p-5"><p className="max-w-[12rem] text-lg font-semibold leading-tight text-white drop-shadow">{c.title}</p></div>
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5"><p className="max-w-[12rem] text-xs text-white/90">{c.card}</p><span className="btn btn-white !px-4 !py-2 text-xs">See more <ArrowUpRight size={13} /></span></div>
             </Link>
           ))}
         </Reveal>

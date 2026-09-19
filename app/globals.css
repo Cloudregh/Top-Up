@@ -40,6 +40,7 @@ body {
 @layer components {
 .card { background: #fff; border-radius: 28px; border: 1px solid #e3eefb; box-shadow: 0 10px 40px -22px rgba(1, 37, 147, 0.28); }
 .tile { background: var(--tile); border-radius: 28px; }
+.hero-soft { background: linear-gradient(115deg, #4aa6f2 0%, #6fb7f4 45%, #a3d8c6 100%); }
 .hero-gradient { background: linear-gradient(115deg, #058ded 0%, #0a55c8 48%, #012593 100%); }
 .wordmark { background: linear-gradient(90deg, #7cc4f8 0%, #058ded 45%, #2f9440 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .btn { white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; border-radius: 9999px; padding: .75rem 1.4rem; font-weight: 600; font-size: .9rem; transition: transform .2s, background .2s, opacity .2s; cursor: pointer; }
@@ -60,11 +61,6 @@ body {
 @media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } }
 .dot::before { content: ""; display: inline-block; width: 4px; height: 4px; border-radius: 9999px; background: currentColor; margin-right: 8px; vertical-align: middle; }
 .hide-scroll { scrollbar-width: none; } .hide-scroll::-webkit-scrollbar { display: none; }
-.hero-person {
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 40%), linear-gradient(to bottom, transparent 0%, #000 18%);
-  mask-image: linear-gradient(to right, transparent 0%, #000 40%), linear-gradient(to bottom, transparent 0%, #000 18%);
-  -webkit-mask-composite: source-in; mask-composite: intersect;
-}
 }
 
 @keyframes sh { to { background-position: -200% 0; } }

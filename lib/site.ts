@@ -35,17 +35,17 @@ export const AWARDS = [
   { t: "Emerging Brand of the Year", by: "Ghana Pharma Awards 2023 · Community Pharmacy Sigma Award" },
   { t: "Outstanding Pharmaceutical Services", by: "Recognised by Premier Health Insurance" },
   { t: "Loyalty Award of Appreciation", by: "Unichem Ghana Group" },
-  { t: "Certificate of Honour — 10 Years", by: "Ghana College of Pharmacists" },
+  { t: "Certificate of Honour 10 Years", by: "Ghana College of Pharmacists" },
 ];
 
 export const NEWS = [
   { t: "Top-Up Pharmacy Supports Graphic's Annual Free Healthcare Screening", d: "2025-09-06" },
   { t: "Top-Up Pharmacy offers free health screening to residents at Asenemaso Abuakwa", d: "2025-09-05" },
-  { t: "One Year Of Unwavering Commitment At Top-Up Pharmacy – Asenemaso-Abuakwa!", d: "2025-09-05" },
+  { t: "One Year Of Unwavering Commitment At Top-Up Pharmacy Asenemaso-Abuakwa!", d: "2025-09-05" },
   { t: "Top-Up Pharmacy Recognized By Premier Health Insurance For Outstanding Pharmaceutical Services", d: "2025-09-04" },
-  { t: "Customers' Choice Awards Ghana 2024 – Pharmaceutical Company Of The Year", d: "2025-09-04" },
-  { t: "Unichem Ghana Group – Loyalty Award Of Appreciation", d: "2025-09-04" },
-  { t: "Ghana Pharma Awards 2023 – Community Pharmacy Sigma Award", d: "2025-09-04" },
+  { t: "Customers' Choice Awards Ghana 2024 Pharmaceutical Company Of The Year", d: "2025-09-04" },
+  { t: "Unichem Ghana Group Loyalty Award Of Appreciation", d: "2025-09-04" },
+  { t: "Ghana Pharma Awards 2023 Community Pharmacy Sigma Award", d: "2025-09-04" },
   { t: "Top-Up Pharmacy Honored by the Ghana College of Pharmacists for 10 Years of Contribution", d: "2025-09-04" },
 ];
 
@@ -62,4 +62,41 @@ export const LOCATIONS = [
   { name: "Tema — Community 9", addr: "Sena House, Hospital Road, Community 9, Tema (near Bethel Hospital)" },
   { name: "Accra", addr: "Contact us for the branch nearest you" },
   { name: "Kumasi — Asenemaso Abuakwa", addr: "Kumasi Abuakwa branch" },
+];
+
+/**
+ * Campaign / condition explainers. General educational copy — PLACEHOLDER until the CMS
+ * supplies pharmacist-approved text. `searchTerms` are sent to GET /catalogue?q= so the
+ * medicines shown at the bottom of each page always come live from the API.
+ */
+export interface Campaign {
+  slug: string; title: string; card: string; img: "cat_cough" | "season_pain" | "season_early";
+  intro: string; why: string[]; selfCare: string[]; seeHelp: string[]; searchTerms: string[];
+  cta?: { href: string; label: string };
+}
+export const CAMPAIGNS: Campaign[] = [
+  {
+    slug: "cough-cold-flu", title: "Kick that cough away", card: "Cough, cold & flu care", img: "cat_cough",
+    intro: "A cough is your body's way of clearing your airways. Most coughs and colds are caused by viruses and settle by themselves, but the right care can make you much more comfortable while they do.",
+    why: ["Viral infections such as the common cold and flu are the most frequent cause.", "Allergies, dust, smoke and dry air can irritate the throat and airways.", "Acid reflux and some medicines can cause a lingering dry cough.", "A dry, tickly cough and a chesty, phlegm-producing cough are treated differently — tell your pharmacist which you have."],
+    selfCare: ["Rest and drink plenty of fluids.", "Warm drinks with honey and lemon can soothe the throat (not for babies under 1 year).", "Breathe steam or use a humidifier to loosen phlegm.", "Avoid smoke and other irritants, and wash your hands often to avoid passing it on."],
+    seeHelp: ["A cough lasting more than three weeks.", "Shortness of breath, wheezing or chest pain.", "Coughing up blood, or a high fever that won't settle.", "A cough in a young baby, an older adult, or someone with a long-term condition."],
+    searchTerms: ["cough", "cold", "flu", "syrup"],
+  },
+  {
+    slug: "pain-relief", title: "Fast pain relief", card: "Headache, body & muscle pain", img: "season_pain",
+    intro: "Headaches and body aches are common and usually short-lived. Understanding what's behind your pain helps you choose the right relief and know when it needs a closer look.",
+    why: ["Tension headaches are often linked to stress, poor sleep, long screen time or dehydration.", "Muscle aches can follow exercise, strain, lifting or sitting in one position too long.", "Infections such as flu or malaria can bring body aches with fever.", "Migraines cause a throbbing headache, often with nausea or light sensitivity."],
+    selfCare: ["Rest in a quiet, dim room and drink water.", "A warm or cold compress on the sore area can ease pain.", "Gentle stretching and movement help stiff muscles.", "Keep a note of when the pain starts — patterns help your pharmacist advise you."],
+    seeHelp: ["A sudden, severe headache unlike any before.", "Headache with fever, stiff neck, confusion or vision changes.", "Pain after an injury or fall.", "Pain that keeps returning or lasts more than a few days."],
+    searchTerms: ["paracetamol", "ibuprofen", "diclofenac", "pain"],
+  },
+  {
+    slug: "early-detection", title: "Early detection saves lives", card: "Breast Cancer Awareness Month — mammograms catch it early", img: "season_early",
+    intro: "Finding breast cancer early gives the best chance of successful treatment. Our goal throughout the month is to stress the importance of mammograms as the best screening tool to detect breast cancer early.",
+    why: ["Screening can find changes before you can feel or see them.", "Regular breast self-checks help you learn what's normal for you.", "Risk rises with age and can be higher with a family history — but anyone can be affected."],
+    selfCare: ["Check your breasts regularly and know your normal.", "Look for a new lump, a change in size or shape, dimpling of the skin, or changes to the nipple.", "Book a screening or mammogram — don't wait for symptoms.", "Encourage the women in your life to get checked too."],
+    seeHelp: ["Any new lump or thickening in the breast or armpit.", "Skin changes, redness or dimpling.", "Nipple discharge or a nipple that turns inward.", "Persistent pain in one area."],
+    searchTerms: [], cta: { href: "/appointment", label: "Book a screening appointment" },
+  },
 ];

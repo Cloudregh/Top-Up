@@ -5,6 +5,9 @@ import { Headset, MessageCircle, Phone, Send, X } from "lucide-react";
 import { SUPPORT, pretty } from "@/lib/format";
 import { useAuth } from "./AuthProvider";
 
+/** Opens the support panel from anywhere (e.g. "Not sure? Need help?" prompts). */
+export const openSupport = () => window.dispatchEvent(new Event("topup:open-support"));
+
 const TOPICS = ["Track my order", "Prescription help", "Payment problem", "Speak to a pharmacist", "Delivery question"];
 
 /**
@@ -19,6 +22,12 @@ export function SupportWidget() {
   const [typing, setTyping] = useState(true);
   const panel = useRef<HTMLDivElement>(null);
   const fab = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const h = () => setOpen(true);
+    window.addEventListener("topup:open-support", h);
+    return () => window.removeEventListener("topup:open-support", h);
+  }, []);
 
   useEffect(() => {
     if (!open) return;

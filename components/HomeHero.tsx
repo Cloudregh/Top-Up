@@ -2,10 +2,13 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ArrowUpRight, ChevronRight, MapPin } from "lucide-react";
+import { ArrowUpRight, ChevronRight } from "lucide-react";
 import { Img } from "./Img";
-import { CountUp } from "./CountUp";
 import { Pending } from "./Pending";
+
+const Star = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" aria-hidden {...props}><path fill="currentColor" d="M12 0c.6 6.6 4.9 11.4 12 12-7.1.6-11.4 5.4-12 12C11.4 17.4 7.1 12.6 0 12 7.1 11.4 11.4 6.6 12 0Z" /></svg>
+);
 
 export function HomeHero() {
   const root = useRef<HTMLDivElement>(null);
@@ -14,37 +17,60 @@ export function HomeHero() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
       tl.from("[data-char]", { yPercent: 115, duration: 1.3, stagger: 0.05 })
-        .from("[data-person]", { xPercent: 12, opacity: 0, duration: 1.3 }, "-=1")
-        .from("[data-hero-fade]", { y: 26, opacity: 0, duration: 0.9, stagger: 0.12 }, "-=0.9")
-        .from("[data-float]", { y: 40, opacity: 0, scale: 0.92, duration: 1 }, "-=0.9");
-      gsap.to("[data-float]", { y: "-=8", duration: 2.4, ease: "sine.inOut", yoyo: true, repeat: -1 });
+        .from("[data-mark]", { scale: 0.6, rotate: -25, opacity: 0, duration: 1.2 }, "-=1")
+        .from("[data-person]", { y: 70, opacity: 0, duration: 1.2 }, "-=1.05")
+        .from("[data-hero-fade]", { y: 24, opacity: 0, duration: 0.9, stagger: 0.12 }, "-=0.8")
+        .from("[data-card]", { y: 40, opacity: 0, scale: 0.94, duration: 1 }, "-=0.9");
+      gsap.to("[data-card]", { y: "-=7", duration: 2.6, ease: "sine.inOut", yoyo: true, repeat: -1 });
+      gsap.to("[data-mark]", { rotate: 8, duration: 5, ease: "sine.inOut", yoyo: true, repeat: -1 });
+      gsap.to("[data-star]", { rotate: 90, duration: 6, ease: "none", repeat: -1 });
     }, root);
     return () => ctx.revert();
   }, []);
 
   return (
-    <Pending waitingFor="settings: branches + opening hours"><section ref={root} className="gutter">
-      <div className="hero-gradient relative min-h-[500px] overflow-hidden rounded-[30px] sm:min-h-[600px] lg:min-h-[640px]">
-        <h1 className="pointer-events-none absolute left-[3%] top-[4%] z-20 select-none text-[clamp(3.4rem,14.2vw,13.5rem)] font-extrabold leading-[0.95] tracking-[-0.06em] text-white" aria-label="Pharmacy">
-          {"Pharmacy".split("").map((c, i) => <span key={i} className="inline-block overflow-hidden pb-[0.12em] align-top"><span data-char className="inline-block">{c}</span></span>)}
-        </h1>
+    <Pending waitingFor="settings: branches + opening hours">
+      <section ref={root} className="gutter">
+        <div className="hero-soft relative h-[540px] overflow-hidden rounded-[30px] sm:h-[clamp(540px,46vw,780px)]">
+          {/* giant wordmark */}
+          <h1 className="pointer-events-none absolute left-[2.5%] top-[2%] z-10 select-none text-[clamp(3.4rem,14.8vw,16rem)] font-extrabold leading-[1] tracking-[-0.07em] text-white" aria-label="Pharmacy">
+            {"Pharmacy".split("").map((c, i) => (
+              <span key={i} className="relative inline-block overflow-hidden pb-[0.14em] align-top">
+                <span data-char className="relative inline-block">{c}</span>
+                {i === 0 && <Star data-star className="absolute left-[40%] top-[28%] size-[0.19em] text-white" />}
+              </span>
+            ))}
+          </h1>
 
-        <div data-person className="absolute bottom-0 right-[-4%] z-10 h-[72%] w-[74%] sm:right-0 sm:h-[90%] sm:w-[46%] lg:w-[38%]">
-          <Img k="hero" w={1000} priority alt="Top-Up pharmacist" className="hero-person size-full object-cover object-top" />
-        </div>
+          {/* Top-Up mark as the translucent brand shape */}
+          <div data-mark aria-hidden className="absolute right-[3%] top-[5%] z-0 aspect-square w-[24%] bg-white/45 sm:w-[19%]"
+            style={{ WebkitMask: "url(/logo-mark-v2.png) center / contain no-repeat", mask: "url(/logo-mark-v2.png) center / contain no-repeat" }} />
 
-        <div data-float className="absolute bottom-5 left-5 z-20 w-[210px] rounded-[24px] bg-white p-4 shadow-xl sm:bottom-8 sm:left-8 sm:w-[250px] sm:p-5">
-          <div className="flex items-center justify-between"><span className="text-sm font-semibold">Pharmacy hours</span><span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-bold">Always</span></div>
-          <div className="mt-3 flex items-center gap-2 text-xs text-muted"><span className="grid size-8 place-items-center rounded-full bg-mist"><MapPin size={14} /></span><span className="flex-1 font-medium text-ink">Tema · Accra · Kumasi</span><ChevronRight size={14} /></div>
-          <p className="mt-3 text-5xl font-extrabold leading-none tracking-tighter sm:text-6xl"><CountUp to={24} /><span className="text-lg font-medium text-muted">/7</span></p>
-        </div>
+          {/* person (cut-out) overlaps the wordmark */}
+          <div data-person className="absolute bottom-0 right-[-10%] z-20 aspect-[834/909] h-[62%] sm:right-[1%] sm:h-[72%] lg:h-[84%]">
+            <Img k="hero_cutout" w={1000} priority alt="Top-Up pharmacist" className="size-full object-contain object-bottom drop-shadow-[0_20px_30px_rgba(1,37,147,0.18)]" />
+          </div>
 
-        <div className="absolute bottom-6 left-[52%] z-20 hidden max-w-[260px] space-y-4 lg:block xl:left-[40%]">
-          <p data-hero-fade className="text-sm font-medium leading-snug text-white">Quality healthcare products from a leading retail and wholesale pharmaceutical company — whatever you need, 24/7.</p>
-          <Link data-hero-fade href="/shop" className="btn btn-white shadow-lg">Shop Now <ArrowUpRight size={15} /></Link>
+          {/* info card */}
+          <div data-card className="absolute bottom-5 left-5 z-30 w-[200px] rounded-[22px] bg-white p-4 shadow-xl sm:bottom-[8%] sm:left-[3.5%] sm:w-[250px] sm:p-5">
+            <div className="flex items-center justify-between"><span className="text-sm font-semibold">Pharmacy hours</span><span className="rounded-full bg-[#dff1e4] px-3 py-1 text-xs font-bold text-leaf">Open</span></div>
+            <div className="mt-3 flex items-center gap-2.5 text-xs">
+              <span className="grid size-9 shrink-0 place-items-center rounded-full bg-mist"><span className="size-5 bg-brand" style={{ WebkitMask: "url(/logo-mark-v2.png) center / contain no-repeat", mask: "url(/logo-mark-v2.png) center / contain no-repeat" }} /></span>
+              <span className="flex-1 font-medium">Tema · Accra · Kumasi</span><ChevronRight size={14} />
+            </div>
+            <div className="mt-3 flex items-end justify-between">
+              <p className="text-5xl font-medium leading-none tracking-tighter sm:text-6xl">24/7<span className="ml-1 text-sm font-normal text-muted">/open</span></p>
+              <span className="mb-1 flex flex-col gap-1.5" aria-hidden><i className="size-1.5 rounded-full bg-ink/20" /><i className="size-1.5 rounded-full bg-ink" /><i className="size-1.5 rounded-full bg-ink/20" /></span>
+            </div>
+          </div>
+
+          {/* description + CTA */}
+          <div className="absolute left-5 top-[40%] z-30 max-w-[46%] space-y-4 sm:left-[3.5%] sm:top-[33%] sm:max-w-[250px] lg:left-[31%] lg:top-auto lg:bottom-[9%]">
+            <p data-hero-fade className="text-xs font-semibold leading-snug text-white [text-shadow:0_1px_8px_rgba(1,37,147,.35)] sm:text-[13px]">Quality healthcare products from a leading retail and wholesale pharmaceutical company — whatever you need, 24/7.</p>
+            <Link data-hero-fade href="/shop" className="btn btn-white shadow-md">Shop Now <ArrowUpRight size={15} /></Link>
+          </div>
         </div>
-        <Link href="/shop" className="btn btn-white absolute bottom-5 right-5 z-20 shadow-lg lg:hidden">Shop Now <ArrowUpRight size={15} /></Link>
-      </div>
-    </section></Pending>
+      </section>
+    </Pending>
   );
 }
