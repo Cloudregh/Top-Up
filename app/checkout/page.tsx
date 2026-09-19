@@ -60,10 +60,10 @@ export default function CheckoutPage() {
         });
         orderId.current = o.id;
         fulfilment.set(o.id, { mode, where: mode === "delivery" ? address : branch, phone });
-        clear();
       }
       setBusy("pay");
       const pay = await startPayment(orderId.current, payKey.current);
+      clear();
       if (pay.redirect_url) { window.location.href = pay.redirect_url; return; }
       router.replace(`/orders/${orderId.current}?pay=1`);
     } catch (x) {
