@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
-import { SUPPORT, pretty } from "@/lib/format";
+import { SOCIAL, SUPPORT, pretty } from "@/lib/format";
+import { InstagramIcon } from "./InstagramIcon";
 import { Logo } from "./Logo";
 
 const cols: [string, [string, string][]][] = [
   ["Shop", [["/shop", "All products"], ["/prescriptions", "Prescriptions"], ["/cart", "Cart"], ["/orders", "My orders"]]],
-  ["Explore", [["/about", "About Us"], ["/why-choose-us", "Why Choose Us"], ["/services", "Services"], ["/news", "News"], ["/careers", "Careers"], ["/contact", "Contact"]]],
+  ["Explore", [["/about", "About Us"], ["/why-choose-us", "Why Choose Us"], ["/services", "Services"], ["/news", "News"], ["/careers", "Careers"], ["/contact", "Contact"], ["/#branches", "Find a branch"]]],
   ["Health Hub", [["/appointment", "Book Appointment"], ["/corporate-health", "Corporate Health"], ["/travel-health", "Travel Health"], ["/faq", "FAQ's"]]],
 ];
 
@@ -17,6 +18,7 @@ export function Footer() {
           <div className="space-y-4">
             <Logo size={48} tagline />
             <p className="max-w-65 text-sm text-muted">One of the best pharmacies in Ghana — a leading retail and wholesale pharmaceutical company with branches in Tema, Accra and Kumasi.</p>
+            <a href={SOCIAL.instagram} target="_blank" rel="noopener" className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold shadow-sm ring-1 ring-black/5 transition hover:text-brand"><InstagramIcon size={16} /> @topuppharmacy</a>
           </div>
           {cols.map(([t, ls]) => (
             <div key={t}><p className="mb-4 text-sm font-bold">{t}</p><ul className="space-y-2.5 text-sm text-muted">{ls.map(([h, l]) => <li key={h}><Link href={h} className="hover:text-ink">{l}</Link></li>)}</ul></div>

@@ -15,6 +15,9 @@ export const SUPPORT = {
   phone2: process.env.NEXT_PUBLIC_SUPPORT_PHONE_2 || "233240021200",
   email: process.env.NEXT_PUBLIC_SUPPORT_EMAIL || "",
 };
+export const SOCIAL = {
+  instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://www.instagram.com/topuppharmacy",
+};
 export const pretty = (n: string) => `+${n.slice(0, 3)} ${n.slice(3, 5)} ${n.slice(5, 8)} ${n.slice(8)}`;
 
 // The API's `category` filter matches products.form (no taxonomy exists yet).

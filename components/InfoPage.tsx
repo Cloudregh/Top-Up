@@ -9,7 +9,7 @@ export function InfoHero({ eyebrow, title, intro, image }: { eyebrow: string; ti
   return (
     <section className="gutter pt-4 sm:pt-6">
       <div className="hero-gradient relative flex min-h-80 items-end overflow-hidden rounded-[30px] p-8 sm:min-h-95 sm:p-12">
-        {image && <Img k={image} w={1000} h={700} alt="" priority className="absolute inset-y-0 right-0 hidden h-full w-[42%] object-cover sm:block" style={{ maskImage: "linear-gradient(to right, transparent, #000 40%)", WebkitMaskImage: "linear-gradient(to right, transparent, #000 40%)" }} />}
+        {image && <Img k={image} w={1200} alt="" priority className="absolute inset-y-0 right-0 hidden h-full w-[42%] object-cover object-[50%_8%] sm:block" style={{ maskImage: "linear-gradient(to right, transparent, #000 40%)", WebkitMaskImage: "linear-gradient(to right, transparent, #000 40%)" }} />}
         <div className="relative z-10 max-w-xl">
           <p className="text-sm font-semibold text-white/90">{eyebrow}</p>
           <h1 className="mt-2 text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl">{title}</h1>

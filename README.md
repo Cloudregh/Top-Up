@@ -18,6 +18,10 @@ To switch: upload each asset to Cloudinary with public id `topup/<key>` (keys li
 Tip: the hero portrait uses `mix-blend-multiply`; a background-removed PNG (Cloudinary `e_background_removal`) will look cleaner.
 Product photos come only from the API's `image_url`; until it exists a neutral "Image soon" tile shows.
 
+**Using Top-Up's own photos (e.g. from Instagram):** Instagram doesn't allow automated downloads, so save the photos you want
+and drop them in `public/images/`, then map a key in `LOCAL` (`lib/images.ts`), e.g. `about_counter: "/images/tema-branch.jpg"`.
+Current stand-ins are Pexels photos of Black/African subjects. Social link: `NEXT_PUBLIC_INSTAGRAM_URL` (footer + contact page).
+
 ## Site structure (from top-uppharmacy.com)
 Home · About (About Us, Why Choose Us, FAQ's) · Services · Health Hub (Prescriptions, Book Appointment, Corporate Health, Travel Health) ·
 News · Careers · Contact · Shop. Enquiry forms (appointment, corporate, travel, careers, contact) open WhatsApp prefilled — no forms backend yet.

@@ -16,4 +16,5 @@ export const notifPrefs = {
   get: () => read("topup.notif", { orderUpdates: true, prescriptionUpdates: true, promotions: false }),
   set: (p: unknown) => write("topup.notif", p),
 };
-export const BRANCHES = ["Tema — Community 9 (Sena House)", "Accra", "Kumasi — Abuakwa"];
+import { BRANCHES_LIST } from "./branches";
+export const BRANCHES = BRANCHES_LIST.filter((b) => !b.wholesale).map((b) => b.name);

@@ -1,31 +1,29 @@
-// Central image registry. Today every key resolves to a Pexels placeholder;
+// Central image registry. Today every key resolves to a Pexels placeholder (people photos are
+// Black/African subjects); swap in Top-Up's own photos via LOCAL below or Cloudinary;
 // once the assets are uploaded to Cloudinary under `topup/<key>`, set
 // NEXT_PUBLIC_IMAGE_SOURCE=cloudinary (+ cloud name) and nothing else changes.
 const PEXELS: Record<string, number> = {
-  cat_vitamins: 13787561,
-  cat_cough: 6285297,
-  cat_pain: 19141233,
-  cat_stomach: 7298668,
-  cat_pregnancy: 2100341,
-  cat_baby: 32103051,
-  season_pain: 7034805,
-  season_early: 15641079,
-  season_family: 5479909,
-  consult_appointment: 19596247,
-  consult_prescription: 19963130,
-  delivery: 5025638,
-  delivery_2: 4440987,
-  about_counter: 12332074,
-  about_pharmacist: 19471015,
-  appointment: 8376309,
-  shelves: 6074000,
-  corporate: 19218034,
-  travel: 5863437,
+  // Campaign cards + pages (Black/African subjects)
+  campaign_cough: 3961224,        // woman with a cold under a blanket
+  campaign_pain: 7298673,         // woman with a headache
+  campaign_early: 6303702,        // woman holding the pink awareness ribbon
+  // Home promo cards
+  consult_appointment: 19596247,  // Black woman pharmacist/doctor
+  consult_prescription: 19963130, // Black woman in scrubs with stethoscope
+  delivery: 6995138,              // courier handing over a parcel
+  // Inner-page heroes
+  about_pharmacist: 5430213,      // African nurse in scrubs
+  appointment: 33674901,          // African nurse portrait
+  support: 8204385,               // customer-support agent with headset
+  corporate: 19218034,            // Black woman doctor
+  travel: 5863437,                // vaccine vials (no people)
 };
 
 // Assets we ship ourselves. With Cloudinary on, these resolve to topup/<key> instead
 // (upload a background-removed PNG; Cloudinary can also do e_background_removal).
-const LOCAL: Record<string, string> = { hero_cutout: "/hero-pharmacist.webp" };
+// To use your own photo for any key, drop the file in /public/images and map it here, e.g.
+//   about_counter: "/images/branch-tema.jpg"
+const LOCAL: Record<string, string> = { hero_cutout: "/hero-pharmacist.webp", pharmacy: "/images/pharmacy.jpg" };
 
 const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 const useCloudinary = process.env.NEXT_PUBLIC_IMAGE_SOURCE === "cloudinary" && !!CLOUD;

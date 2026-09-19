@@ -1,3 +1,4 @@
+import { BRANCHES_LIST } from "./branches";
 // Top-Up Pharmacy site content & structure (from top-uppharmacy.com).
 export const NAV = [
   { href: "/", label: "Home" },
@@ -7,15 +8,6 @@ export const NAV = [
   { href: "/news", label: "News" },
   { href: "/contact", label: "Contact" },
   { href: "/shop", label: "Shop" },
-] as const;
-
-export const CATEGORY_TILES = [
-  { label: "Vitamins & Supplements", q: "vitamin", img: "cat_vitamins" },
-  { label: "Cough, Cold & Flu", q: "cough", img: "cat_cough" },
-  { label: "Pain Relief", q: "pain", img: "cat_pain" },
-  { label: "Stomach & Digestion", q: "omeprazole", img: "cat_stomach" },
-  { label: "Conception & Pregnancy", q: "folic", img: "cat_pregnancy" },
-  { label: "Baby & Child Health", q: "syrup", img: "cat_baby" },
 ] as const;
 
 export const SERVICES = [
@@ -30,13 +22,18 @@ export const SERVICES = [
 
 export const INSURERS = ["GLICO", "Metropolitan Health Insurance", "Phoenix Insurance", "Ace Medical Insurance", "Premier Health Insurance", "Acacia Health Insurance", "GHIC"];
 
-export const AWARDS = [
-  { t: "Pharmaceutical Company of the Year", by: "Customers' Choice Awards Ghana 2024" },
-  { t: "Emerging Brand of the Year", by: "Ghana Pharma Awards 2023 · Community Pharmacy Sigma Award" },
-  { t: "Outstanding Pharmaceutical Services", by: "Recognised by Premier Health Insurance" },
-  { t: "Loyalty Award of Appreciation", by: "Unichem Ghana Group" },
-  { t: "Certificate of Honour 10 Years", by: "Ghana College of Pharmacists" },
+export interface Award { t: string; by: string; img: string; pos?: string }
+export const AWARDS: Award[] = [
+  { t: "Pharmacy Retail Chain Company of the Year 2026", by: "Ghana–West Africa Healthcare Excellence Awards, 9th Edition", img: "/images/awards/trophy-2026.jpg", pos: "50% 42%" },
+  { t: "Certificate of Award", by: "Ghana–West Africa Healthcare Excellence Awards", img: "/images/awards/certificate-handover.jpg", pos: "50% 30%" },
+  { t: "Ghana's Top 10 Pharmaceutical Industry Award — Community Pharmacy", by: "HCOWA Excellence in Healthcare Awards, 2025", img: "/images/awards/hcowa-citation.jpg", pos: "50% 60%" },
+  { t: "Africa Best Business Awards (Ghana)", by: "November 2025", img: "/images/awards/africa-best-group.jpg", pos: "50% 30%" },
+  { t: "Africa Best Business Awards — trophy presentation", by: "Africa Best Business Awards (Ghana)", img: "/images/awards/africa-best-handshake.jpg", pos: "50% 30%" },
+  { t: "Ghana International Product Awards", by: "Powered by West Africa Chamber of Commerce and Industry", img: "/images/awards/gipa-handshake.jpg", pos: "50% 35%" },
+  { t: "Ghana International Product Awards — certificate", by: "Ghana International Product Awards", img: "/images/awards/gipa-group.jpg", pos: "50% 30%" },
+  { t: "National Honours & Awards 2024", by: "Honouring our Distinguished Citizens", img: "/images/awards/national-honours.jpg", pos: "50% 82%" },
 ];
+
 
 export const NEWS = [
   { t: "Top-Up Pharmacy Supports Graphic's Annual Free Healthcare Screening", d: "2025-09-06" },
@@ -58,11 +55,7 @@ export const FAQS = [
   ["How do I reach customer service?", "Tap the “Need help?” button on any page for an instant reply on WhatsApp or by phone, or call our 24/7 hotline."],
 ] as const;
 
-export const LOCATIONS = [
-  { name: "Tema — Community 9", addr: "Sena House, Hospital Road, Community 9, Tema (near Bethel Hospital)" },
-  { name: "Accra", addr: "Contact us for the branch nearest you" },
-  { name: "Kumasi — Asenemaso Abuakwa", addr: "Kumasi Abuakwa branch" },
-];
+
 
 /**
  * Campaign / condition explainers. General educational copy — PLACEHOLDER until the CMS
@@ -70,13 +63,13 @@ export const LOCATIONS = [
  * medicines shown at the bottom of each page always come live from the API.
  */
 export interface Campaign {
-  slug: string; title: string; card: string; img: "cat_cough" | "season_pain" | "season_early";
+  slug: string; title: string; card: string; img: "campaign_cough" | "campaign_pain" | "campaign_early";
   intro: string; why: string[]; selfCare: string[]; seeHelp: string[]; searchTerms: string[];
   cta?: { href: string; label: string };
 }
 export const CAMPAIGNS: Campaign[] = [
   {
-    slug: "cough-cold-flu", title: "Kick that cough away", card: "Cough, cold & flu care", img: "cat_cough",
+    slug: "cough-cold-flu", title: "Kick that cough away", card: "Cough, cold & flu care", img: "campaign_cough",
     intro: "A cough is your body's way of clearing your airways. Most coughs and colds are caused by viruses and settle by themselves, but the right care can make you much more comfortable while they do.",
     why: ["Viral infections such as the common cold and flu are the most frequent cause.", "Allergies, dust, smoke and dry air can irritate the throat and airways.", "Acid reflux and some medicines can cause a lingering dry cough.", "A dry, tickly cough and a chesty, phlegm-producing cough are treated differently tell your pharmacist which you have."],
     selfCare: ["Rest and drink plenty of fluids.", "Warm drinks with honey and lemon can soothe the throat (not for babies under 1 year).", "Breathe steam or use a humidifier to loosen phlegm.", "Avoid smoke and other irritants, and wash your hands often to avoid passing it on."],
@@ -84,7 +77,7 @@ export const CAMPAIGNS: Campaign[] = [
     searchTerms: ["cough", "cold", "flu", "syrup"],
   },
   {
-    slug: "pain-relief", title: "Fast pain relief", card: "Headache, body & muscle pain", img: "season_pain",
+    slug: "pain-relief", title: "Fast pain relief", card: "Headache, body & muscle pain", img: "campaign_pain",
     intro: "Headaches and body aches are common and usually short-lived. Understanding what's behind your pain helps you choose the right relief and know when it needs a closer look.",
     why: ["Tension headaches are often linked to stress, poor sleep, long screen time or dehydration.", "Muscle aches can follow exercise, strain, lifting or sitting in one position too long.", "Infections such as flu or malaria can bring body aches with fever.", "Migraines cause a throbbing headache, often with nausea or light sensitivity."],
     selfCare: ["Rest in a quiet, dim room and drink water.", "A warm or cold compress on the sore area can ease pain.", "Gentle stretching and movement help stiff muscles.", "Keep a note of when the pain starts patterns help your pharmacist advise you."],
@@ -92,7 +85,7 @@ export const CAMPAIGNS: Campaign[] = [
     searchTerms: ["paracetamol", "ibuprofen", "diclofenac", "pain"],
   },
   {
-    slug: "early-detection", title: "Early detection saves lives", card: "Breast Cancer Awareness Month mammograms catch it early", img: "season_early",
+    slug: "early-detection", title: "Early detection saves lives", card: "Breast Cancer Awareness Month mammograms catch it early", img: "campaign_early",
     intro: "Finding breast cancer early gives the best chance of successful treatment. Our goal throughout the month is to stress the importance of mammograms as the best screening tool to detect breast cancer early.",
     why: ["Screening can find changes before you can feel or see them.", "Regular breast self-checks help you learn what's normal for you.", "Risk rises with age and can be higher with a family history but anyone can be affected."],
     selfCare: ["Check your breasts regularly and know your normal.", "Look for a new lump, a change in size or shape, dimpling of the skin, or changes to the nipple.", "Book a screening or mammogram don't wait for symptoms.", "Encourage the women in your life to get checked too."],
@@ -100,3 +93,5 @@ export const CAMPAIGNS: Campaign[] = [
     searchTerms: [], cta: { href: "/appointment", label: "Book a screening appointment" },
   },
 ];
+
+export const LOCATIONS = BRANCHES_LIST.map((b) => ({ name: b.name, addr: b.area }));

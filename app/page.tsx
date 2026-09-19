@@ -1,11 +1,13 @@
 "use client";
 import Link from "next/link";
-import { ArrowUpRight, Award, Clock, FileText, Stethoscope } from "lucide-react";
+import { ArrowUpRight, Clock, FileText, Stethoscope } from "lucide-react";
 import { HomeHero } from "@/components/HomeHero";
 import { Reveal } from "@/components/Reveal";
 import { Img } from "@/components/Img";
 import { Carousel } from "@/components/Carousel";
 import { Faq } from "@/components/Faq";
+import { AwardCard } from "@/components/AwardCard";
+import { BranchFinder } from "@/components/BranchFinder";
 import { ProductCard } from "@/components/ProductCard";
 import { PlaceholderProducts } from "@/components/PlaceholderProducts";
 import { Pending } from "@/components/Pending";
@@ -108,13 +110,7 @@ export default function HomePage() {
           <p className="max-w-55 text-xs text-muted">Recognised by customers, insurers, suppliers and the Ghana College of Pharmacists.</p>
         </Reveal>
         <div className="mt-8"><Carousel arrows itemClass="w-[82%] sm:w-[44%] lg:w-[31%]">
-          {AWARDS.map((a) => (
-            <div key={a.t} className="tile flex h-full min-h-47.5 flex-col justify-between p-6">
-              <div className="flex items-center gap-1 text-amber-500">{Array.from({ length: 5 }, (_, i) => <Award key={i} size={15} />)}</div>
-              <p className="mt-4 text-lg font-semibold leading-snug">{a.t}</p>
-              <p className="mt-3 text-xs text-muted">{a.by}</p>
-            </div>
-          ))}
+          {AWARDS.map((a) => <AwardCard key={a.t} a={a} />)}
         </Carousel></div>
       </section></Pending>
 
@@ -126,9 +122,18 @@ export default function HomePage() {
             <p className="mt-4 text-sm text-white/90">Choose from a number of delivery options available — and track your order live once it&apos;s dispatched.</p>
             <Link href="/shop" className="btn btn-white mt-6 shadow-lg">Order Now</Link>
           </div>
-          <Img k="delivery" w={900} h={700} alt="Delivery rider" className="absolute bottom-0 right-0 hidden h-full w-[46%] object-cover object-top sm:block" style={{ maskImage: "linear-gradient(to right, transparent, #000 35%)", WebkitMaskImage: "linear-gradient(to right, transparent, #000 35%)" }} />
+          <Img k="delivery" w={1100} alt="Delivery courier" className="absolute bottom-0 right-0 hidden h-full w-[46%] object-cover object-top sm:block" style={{ maskImage: "linear-gradient(to right, transparent, #000 35%)", WebkitMaskImage: "linear-gradient(to right, transparent, #000 35%)" }} />
         </Reveal>
       </section></Pending>
+
+      {/* Find a branch */}
+      <section id="branches" className="mt-24 scroll-mt-24 gutter">
+        <Reveal className="grid items-end gap-6 md:grid-cols-[1.4fr_1fr]">
+          <div><h2 className={H2}>Find a Branch<br />Near You</h2><p className="mt-3 max-w-md text-sm text-muted">Call ahead or get directions to any of our branches across Accra, Tema and beyond.</p></div>
+          <Img k="pharmacy" w={800} alt="Inside a Top-Up Pharmacy branch" className="aspect-16/9 w-full rounded-[28px] object-cover" />
+        </Reveal>
+        <div className="mt-8"><BranchFinder compact /></div>
+      </section>
 
       {/* FAQ */}
       <Pending waitingFor="CMS: FAQs"><section className="mt-24 gutter">
