@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: { default: "Top-Up Pharmacy — Whatever you need, 24/7", template: "%s · Top-Up Pharmacy" },
   description: "Order medicines, upload prescriptions and track deliveries from Top-Up Pharmacy, Ghana.",
 };
-export const viewport: Viewport = { themeColor: "#e6eafb", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#ffffff", width: "device-width", initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -25,10 +25,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <CartProvider>
             <ToastProvider>
               <SmoothScroll />
-              <div className="sheet">
-                <Header />
-                <main className="pb-16">{children}</main>
-              </div>
+              <Header />
+              <main className="pb-16">{children}</main>
               <Footer />
               <SupportWidget />
             </ToastProvider>

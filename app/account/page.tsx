@@ -106,7 +106,7 @@ export default function AccountPage() {
           <h2 className="text-lg font-bold">Notifications</h2>
           {([["orderUpdates", "Order updates"], ["prescriptionUpdates", "Prescription decisions"], ["promotions", "Offers & promotions"]] as const).map(([k, l]) => (
             <label key={k} className="flex cursor-pointer items-center justify-between rounded-2xl bg-mist p-3 text-sm font-medium">{l}
-              <input type="checkbox" role="switch" checked={prefs[k]} onChange={() => togglePref(k)} className="size-5 accent-[#2f3fb8]" /></label>))}
+              <input type="checkbox" role="switch" checked={prefs[k]} onChange={() => togglePref(k)} className="size-5 accent-[#0a4fc4]" /></label>))}
           <p className="text-xs text-muted">Saved on this device.</p>
         </section>
       </div>

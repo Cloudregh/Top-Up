@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { SUPPORT, pretty } from "@/lib/format";
+import { Logo } from "./Logo";
 
 const cols: [string, [string, string][]][] = [
   ["Shop", [["/shop", "All products"], ["/prescriptions", "Prescriptions"], ["/cart", "Cart"], ["/orders", "My orders"]]],
@@ -10,10 +11,13 @@ const cols: [string, [string, string][]][] = [
 
 export function Footer() {
   return (
-    <footer className="mx-auto mt-3 max-w-[1360px] px-0 pb-24 sm:px-0 sm:pb-6">
-      <div className="sheet !mt-0 overflow-hidden px-6 pt-12 sm:px-12">
-        <div className="grid gap-10 md:grid-cols-[1.3fr_repeat(3,1fr)_1.3fr]">
-          <p className="max-w-[220px] text-sm text-muted">Top-Up Pharmacy is one of the best pharmacies in Ghana — a leading retail and wholesale pharmaceutical company with branches in Tema, Accra and Kumasi.</p>
+    <footer className="mt-10 overflow-hidden bg-mist pb-24 sm:pb-0">
+      <div className="gutter pt-14">
+        <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)_1.3fr]">
+          <div className="space-y-4">
+            <Logo size={48} tagline />
+            <p className="max-w-[260px] text-sm text-muted">One of the best pharmacies in Ghana — a leading retail and wholesale pharmaceutical company with branches in Tema, Accra and Kumasi.</p>
+          </div>
           {cols.map(([t, ls]) => (
             <div key={t}><p className="mb-4 text-sm font-bold">{t}</p><ul className="space-y-2.5 text-sm text-muted">{ls.map(([h, l]) => <li key={h}><Link href={h} className="hover:text-ink">{l}</Link></li>)}</ul></div>
           ))}
@@ -27,11 +31,11 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <p className="wordmark mt-10 select-none text-center text-[clamp(4.5rem,21vw,17rem)] font-extrabold leading-[0.85] tracking-tighter" aria-hidden>Top-Up</p>
-        <div className="-mx-6 flex flex-wrap justify-between gap-2 border-t border-mist px-6 py-5 text-xs text-muted sm:-mx-12 sm:px-12">
-          <span>© {new Date().getFullYear()} Top-Up Pharmacy. All Rights Reserved.</span>
-          <span>Whatever you need… 24/7</span>
-        </div>
+        <p className="wordmark mt-10 select-none text-center text-[clamp(4.5rem,21vw,20rem)] font-extrabold leading-[0.85] tracking-tighter" aria-hidden>Top-Up</p>
+      </div>
+      <div className="gutter flex flex-wrap justify-between gap-2 border-t border-[#d5e6f8] bg-white py-5 text-xs text-muted">
+        <span>© {new Date().getFullYear()} Top-Up Pharmacy. All Rights Reserved.</span>
+        <span>Whatever you need….24/7</span>
       </div>
     </footer>
   );

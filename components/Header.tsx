@@ -3,7 +3,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { animate } from "animejs";
-import { ArrowUpRight, ChevronDown, Menu, Pill, Search, ShoppingBag, User, X } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Menu, Search, ShoppingBag, User, X } from "lucide-react";
+import { Logo } from "./Logo";
 import { useAuth } from "./AuthProvider";
 import { useCart } from "./CartProvider";
 import { NAV } from "@/lib/site";
@@ -30,12 +31,9 @@ export function Header() {
   const isActive = (h: string) => (h === "/" ? path === "/" : path.startsWith(h));
 
   return (
-    <header className="sticky top-0 z-50 rounded-t-[40px] bg-white/85 px-4 py-4 backdrop-blur-xl sm:px-8">
+    <header className="sticky top-0 z-50 border-b border-[#e3eefb] bg-white/90 px-4 py-3 backdrop-blur-xl sm:px-8 lg:px-12">
       <div className="flex items-center gap-4">
-        <Link href="/" className="flex items-center gap-2 font-bold" aria-label="Top-Up Pharmacy home">
-          <span className="grid size-9 place-items-center rounded-full bg-brand text-white"><Pill size={18} /></span>
-          <span className="hidden whitespace-nowrap text-lg min-[430px]:inline">Top-Up <span className="text-leaf">Pharmacy</span></span>
-        </Link>
+        <Logo size={44} />
 
         <nav className="mx-auto hidden items-center gap-6 xl:flex" aria-label="Main">
           {NAV.map((n) => "children" in n ? (
@@ -57,7 +55,7 @@ export function Header() {
           <button className="btn btn-soft !p-3" aria-label="Search products" onClick={() => router.push("/shop?focus=1")}><Search size={18} /></button>
           <Link href="/cart" className="btn btn-soft relative !p-3" aria-label={`Cart, ${count} items`}>
             <ShoppingBag size={18} />
-            {count > 0 && <span ref={badge} className="absolute -right-1 -top-1 grid min-w-5 place-items-center rounded-full bg-brand px-1 text-[11px] font-bold text-white">{count}</span>}
+            {count > 0 && <span ref={badge} className="absolute -right-1 -top-1 grid min-w-5 place-items-center rounded-full bg-sky px-1 text-[11px] font-bold text-white">{count}</span>}
           </Link>
           {status === "authed" ? (
             <Link href="/account" className="btn btn-primary hidden whitespace-nowrap !py-3 lg:inline-flex"><User size={16} />{user?.name.split(" ")[0]}</Link>

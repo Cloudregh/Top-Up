@@ -107,7 +107,7 @@ export default function CheckoutPage() {
 
           <section className="card space-y-3 p-6">
             <h2 className="text-lg font-bold">{needsRx ? "3" : "2"}. Payment</h2>
-            <label className="flex items-center gap-3 rounded-2xl border-2 border-brand bg-mist p-4"><input type="radio" checked readOnly className="accent-[#2f3fb8]" /><CreditCard className="text-brand" /><span><b className="block">Paystack</b><span className="text-xs text-muted">Mobile money or card — you&apos;ll be redirected to pay securely</span></span></label>
+            <label className="flex items-center gap-3 rounded-2xl border-2 border-brand bg-mist p-4"><input type="radio" checked readOnly className="accent-[#0a4fc4]" /><CreditCard className="text-brand" /><span><b className="block">Paystack</b><span className="text-xs text-muted">Mobile money or card — you&apos;ll be redirected to pay securely</span></span></label>
             <label className="flex items-center gap-3 rounded-2xl bg-mist/60 p-4 opacity-60"><input type="radio" disabled /><Building2 className="text-muted" /><span><b className="block">Approved credit</b><span className="text-xs text-muted">Not yet available online — contact support to pay on account</span></span></label>
           </section>
 

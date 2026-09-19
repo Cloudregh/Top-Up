@@ -20,7 +20,7 @@ export function ProductPhoto({ name, className = "", w = 500 }: { name: string; 
   const key = productImageKey(name);
   return key
     ? <Img k={key} w={w} h={w} alt={name} className={`size-full object-cover ${className}`} />
-    : <div className="grid size-full place-items-center bg-[#eceffa]"><ProductArt name={name} size={Math.min(w / 3, 150)} /></div>;
+    : <div className="grid size-full place-items-center bg-mist"><ProductArt name={name} size={Math.min(w / 3, 150)} /></div>;
 }
 
 export function ProductCard({ item, preview = false }: { item: CatalogueItem; preview?: boolean }) {
@@ -30,7 +30,7 @@ export function ProductCard({ item, preview = false }: { item: CatalogueItem; pr
   const a = AVAIL[item.availability];
 
   return (
-    <div className="tile group flex h-full flex-col p-4 transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-25px_rgba(47,63,184,.45)]">
+    <div className="tile group flex h-full flex-col p-4 transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-25px_rgba(1,37,147,.45)]">
       <Link href={preview ? "/login" : `/shop/${item.product_id}`} className="block">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0"><h3 className="line-clamp-1 text-sm font-semibold">{item.name}</h3><p className="text-xs text-muted">{item.pack_size}</p></div>

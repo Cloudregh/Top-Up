@@ -48,8 +48,8 @@ export function SupportWidget() {
         <div ref={panel} role="dialog" aria-label="Contact support" className="fixed bottom-24 right-3 z-[60] w-[calc(100vw-1.5rem)] max-w-sm overflow-hidden rounded-[28px] bg-white shadow-2xl ring-1 ring-black/5 sm:bottom-24 sm:right-6">
           <div className="hero-gradient flex items-center gap-3 px-5 py-4">
             <span className="relative grid size-11 place-items-center rounded-full bg-white text-brand"><Headset size={20} /><span className="absolute -right-0.5 -top-0.5 size-3 rounded-full border-2 border-white bg-emerald-500" /></span>
-            <div className="flex-1"><p className="font-bold leading-tight">Customer support</p><p className="text-xs text-ink/70">Online 24/7 · replies right away</p></div>
-            <button onClick={() => setOpen(false)} aria-label="Close support" className="rounded-full p-2 hover:bg-white/50"><X size={18} /></button>
+            <div className="flex-1"><p className="font-bold leading-tight text-white">Customer support</p><p className="text-xs text-white/80">Online 24/7 · replies right away</p></div>
+            <button onClick={() => setOpen(false)} aria-label="Close support" className="rounded-full p-2 text-white hover:bg-white/20"><X size={18} /></button>
           </div>
           <div className="space-y-3 p-5">
             <div data-pop className="max-w-[85%] rounded-2xl rounded-tl-md bg-mist px-4 py-3 text-sm">
@@ -72,7 +72,7 @@ export function SupportWidget() {
         </div>
       )}
       <button ref={fab} onClick={() => setOpen((o) => !o)} aria-label={open ? "Close support" : "Contact support"} aria-expanded={open}
-        className="fixed bottom-5 right-3 z-[60] flex items-center gap-2 rounded-full bg-ink px-5 py-4 font-semibold text-white shadow-2xl transition hover:bg-brand sm:right-6">
+        className="fixed bottom-5 right-3 z-[60] flex items-center gap-2 rounded-full bg-deep px-5 py-4 font-semibold text-white shadow-2xl transition hover:bg-sky sm:right-6">
         {open ? <X size={20} /> : <Headset size={20} />}<span className="hidden sm:inline">{open ? "Close" : "Need help?"}</span>
       </button>
     </>

@@ -1,4 +1,4 @@
-const PALETTES = [["#f59e0b", "#fde68a"], ["#2f3fb8", "#c7d0f8"], ["#3fa34d", "#c9ecd0"], ["#e11d74", "#fbcfe3"], ["#0ea5e9", "#bde6fb"], ["#7c3aed", "#ddd0fb"]];
+const PALETTES = [["#0a55c8", "#cfe6fb"], ["#2f9440", "#d2ecd7"], ["#058ded", "#c9e6fb"], ["#012593", "#cbd4f2"]];
 
 export function ProductArt({ name, size = 120 }: { name: string; size?: number }) {
   const h = [...name].reduce((a, c) => a + c.charCodeAt(0), 0);
