@@ -15,7 +15,7 @@ export function HomeHero() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+      const tl = gsap.timeline({ defaults: { ease: "power4.out" }, onComplete: () => { gsap.set("[data-charwrap]", { overflow: "visible" }); } });
       tl.from("[data-char]", { yPercent: 115, duration: 1.3, stagger: 0.05 })
         .from("[data-mark]", { scale: 0.6, rotate: -25, opacity: 0, duration: 1.2 }, "-=1")
         .from("[data-person]", { y: 70, opacity: 0, duration: 1.2 }, "-=1.05")
@@ -33,11 +33,11 @@ export function HomeHero() {
       <section ref={root} className="gutter pt-4 sm:pt-6">
         <div className="hero-soft relative h-[540px] overflow-hidden rounded-[30px] sm:h-[clamp(540px,46vw,780px)]">
           {/* giant wordmark */}
-          <h1 className="pointer-events-none absolute left-[2.5%] top-[2%] z-10 select-none text-[clamp(3.4rem,14.8vw,16rem)] font-extrabold leading-[1] tracking-[-0.07em] text-white" aria-label="Pharmacy">
+          <h1 className="pointer-events-none absolute left-[2.5%] top-[2%] z-10 select-none text-[clamp(3.4rem,14.8vw,16rem)] font-extrabold leading-[1] tracking-[-0.04em] text-white" aria-label="Pharmacy">
             {"Pharmacy".split("").map((c, i) => (
-              <span key={i} className="relative -mb-[0.2em] inline-block overflow-hidden pb-[0.34em] align-top">
+              <span key={i} data-charwrap className="relative -mb-[0.2em] -ml-[0.08em] -mr-[0.18em] inline-block overflow-hidden pb-[0.34em] pl-[0.08em] pr-[0.18em] align-top">
                 <span data-char className="relative inline-block">{c}</span>
-                {i === 0 && <Star data-star className="absolute left-[0.27em] top-[0.335em] size-[0.13em] text-white" />}
+                {i === 0 && <Star data-star className="absolute left-[0.35em] top-[0.335em] size-[0.13em] text-white" />}
               </span>
             ))}
           </h1>
@@ -66,7 +66,7 @@ export function HomeHero() {
 
           {/* description + CTA */}
           <div className="absolute left-5 top-[40%] z-30 max-w-[46%] space-y-4 sm:left-[3.5%] sm:top-[33%] sm:max-w-[250px] lg:left-[31%] lg:top-auto lg:bottom-[9%]">
-            <p data-hero-fade className="text-xs font-semibold leading-snug text-white [text-shadow:0_1px_8px_rgba(1,37,147,.35)] sm:text-[13px]">Quality healthcare products from a leading retail and wholesale pharmaceutical company — whatever you need, 24/7.</p>
+            <p data-hero-fade className="text-xs font-semibold leading-snug text-white [text-shadow:0_1px_8px_rgba(1,37,147,.35)] sm:text-[13px]">Quality healthcare products from a leading retail and wholesale pharmaceutical company whatever you need, 24/7.</p>
             <Link data-hero-fade href="/shop" className="btn btn-white shadow-md">Shop Now <ArrowUpRight size={15} /></Link>
           </div>
         </div>

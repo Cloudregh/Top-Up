@@ -54,7 +54,7 @@ export const FAQS = [
   ["Can I order prescription medicines online?", "Yes. Upload a photo or PDF of your prescription; a pharmacist reviews it and you'll see the decision and their note in your account. Once approved you can order the controlled items it covers."],
   ["Do you deliver?", "We offer Home & Office Delivery, with a number of delivery options available. You choose delivery or branch pickup at checkout and can track the order once it's dispatched."],
   ["Which health insurers do you work with?", "GLICO, Metropolitan Health Insurance, Phoenix Insurance, Ace Medical Insurance, Premier Health Insurance, Acacia Health Insurance and GHIC."],
-  ["How do I pay?", "Pay securely online with mobile money or card via Paystack. Approved business accounts can also be set up on credit — contact our team."],
+  ["How do I pay?", "Pay securely online with mobile money or card via Paystack. Approved business accounts can also be set up on credit contact our team."],
   ["How do I reach customer service?", "Tap the “Need help?” button on any page for an instant reply on WhatsApp or by phone, or call our 24/7 hotline."],
 ] as const;
 
@@ -78,7 +78,7 @@ export const CAMPAIGNS: Campaign[] = [
   {
     slug: "cough-cold-flu", title: "Kick that cough away", card: "Cough, cold & flu care", img: "cat_cough",
     intro: "A cough is your body's way of clearing your airways. Most coughs and colds are caused by viruses and settle by themselves, but the right care can make you much more comfortable while they do.",
-    why: ["Viral infections such as the common cold and flu are the most frequent cause.", "Allergies, dust, smoke and dry air can irritate the throat and airways.", "Acid reflux and some medicines can cause a lingering dry cough.", "A dry, tickly cough and a chesty, phlegm-producing cough are treated differently — tell your pharmacist which you have."],
+    why: ["Viral infections such as the common cold and flu are the most frequent cause.", "Allergies, dust, smoke and dry air can irritate the throat and airways.", "Acid reflux and some medicines can cause a lingering dry cough.", "A dry, tickly cough and a chesty, phlegm-producing cough are treated differently tell your pharmacist which you have."],
     selfCare: ["Rest and drink plenty of fluids.", "Warm drinks with honey and lemon can soothe the throat (not for babies under 1 year).", "Breathe steam or use a humidifier to loosen phlegm.", "Avoid smoke and other irritants, and wash your hands often to avoid passing it on."],
     seeHelp: ["A cough lasting more than three weeks.", "Shortness of breath, wheezing or chest pain.", "Coughing up blood, or a high fever that won't settle.", "A cough in a young baby, an older adult, or someone with a long-term condition."],
     searchTerms: ["cough", "cold", "flu", "syrup"],
@@ -87,15 +87,15 @@ export const CAMPAIGNS: Campaign[] = [
     slug: "pain-relief", title: "Fast pain relief", card: "Headache, body & muscle pain", img: "season_pain",
     intro: "Headaches and body aches are common and usually short-lived. Understanding what's behind your pain helps you choose the right relief and know when it needs a closer look.",
     why: ["Tension headaches are often linked to stress, poor sleep, long screen time or dehydration.", "Muscle aches can follow exercise, strain, lifting or sitting in one position too long.", "Infections such as flu or malaria can bring body aches with fever.", "Migraines cause a throbbing headache, often with nausea or light sensitivity."],
-    selfCare: ["Rest in a quiet, dim room and drink water.", "A warm or cold compress on the sore area can ease pain.", "Gentle stretching and movement help stiff muscles.", "Keep a note of when the pain starts — patterns help your pharmacist advise you."],
+    selfCare: ["Rest in a quiet, dim room and drink water.", "A warm or cold compress on the sore area can ease pain.", "Gentle stretching and movement help stiff muscles.", "Keep a note of when the pain starts patterns help your pharmacist advise you."],
     seeHelp: ["A sudden, severe headache unlike any before.", "Headache with fever, stiff neck, confusion or vision changes.", "Pain after an injury or fall.", "Pain that keeps returning or lasts more than a few days."],
     searchTerms: ["paracetamol", "ibuprofen", "diclofenac", "pain"],
   },
   {
-    slug: "early-detection", title: "Early detection saves lives", card: "Breast Cancer Awareness Month — mammograms catch it early", img: "season_early",
+    slug: "early-detection", title: "Early detection saves lives", card: "Breast Cancer Awareness Month mammograms catch it early", img: "season_early",
     intro: "Finding breast cancer early gives the best chance of successful treatment. Our goal throughout the month is to stress the importance of mammograms as the best screening tool to detect breast cancer early.",
-    why: ["Screening can find changes before you can feel or see them.", "Regular breast self-checks help you learn what's normal for you.", "Risk rises with age and can be higher with a family history — but anyone can be affected."],
-    selfCare: ["Check your breasts regularly and know your normal.", "Look for a new lump, a change in size or shape, dimpling of the skin, or changes to the nipple.", "Book a screening or mammogram — don't wait for symptoms.", "Encourage the women in your life to get checked too."],
+    why: ["Screening can find changes before you can feel or see them.", "Regular breast self-checks help you learn what's normal for you.", "Risk rises with age and can be higher with a family history but anyone can be affected."],
+    selfCare: ["Check your breasts regularly and know your normal.", "Look for a new lump, a change in size or shape, dimpling of the skin, or changes to the nipple.", "Book a screening or mammogram don't wait for symptoms.", "Encourage the women in your life to get checked too."],
     seeHelp: ["Any new lump or thickening in the breast or armpit.", "Skin changes, redness or dimpling.", "Nipple discharge or a nipple that turns inward.", "Persistent pain in one area."],
     searchTerms: [], cta: { href: "/appointment", label: "Book a screening appointment" },
   },

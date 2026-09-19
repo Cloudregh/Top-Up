@@ -67,7 +67,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="tile mt-3 max-h-[70vh] space-y-1 overflow-y-auto bg-white p-3 shadow-xl ring-1 ring-black/5 xl:hidden">
+        <div data-lenis-prevent className="tile mt-3 max-h-[calc(100dvh-6rem)] space-y-1 overflow-y-auto overscroll-contain bg-white p-3 shadow-xl ring-1 ring-black/5 xl:hidden">
           {mobileItems.map((n) => n.href === null
             ? <p key={n.label} className="px-4 pt-3 text-xs font-bold uppercase tracking-wide text-muted">{n.label}</p>
             : <Link key={n.href} href={n.href} className="block rounded-2xl px-4 py-3 font-medium hover:bg-mist">{n.label}</Link>)}
