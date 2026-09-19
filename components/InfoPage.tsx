@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Img } from "./Img";
 import { Reveal } from "./Reveal";
+import { Pending } from "./Pending";
 import type { ImgKey } from "@/lib/images";
 
 export function InfoHero({ eyebrow, title, intro, image }: { eyebrow: string; title: string; intro: string; image?: ImgKey }) {
@@ -19,8 +20,9 @@ export function InfoHero({ eyebrow, title, intro, image }: { eyebrow: string; ti
   );
 }
 
-export function Section({ title, children, className = "" }: { title?: string; children: React.ReactNode; className?: string }) {
-  return <Reveal className={`mt-16 gutter ${className}`}>{title && <h2 className="mb-6 text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h2>}{children}</Reveal>;
+export function Section({ title, children, className = "", waitingFor }: { title?: string; children: React.ReactNode; className?: string; waitingFor?: string }) {
+  const inner = <>{title && <h2 className="mb-6 text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h2>}{children}</>;
+  return <Reveal className={`mt-16 gutter ${className}`}>{waitingFor ? <Pending waitingFor={waitingFor}>{inner}</Pending> : inner}</Reveal>;
 }
 
 export function Cta({ href, children, external }: { href: string; children: React.ReactNode; external?: boolean }) {

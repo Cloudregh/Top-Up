@@ -9,6 +9,7 @@ import { api, errInfo, newKey } from "@/lib/api";
 import { BRANCHES, fulfilment, prescriptionIds } from "@/lib/local";
 import { startPayment } from "@/lib/orders";
 import { useRequireAuth } from "@/lib/hooks";
+import { Pending } from "@/components/Pending";
 import { ghs, shortId } from "@/lib/format";
 import type { CustomerOrder, Prescription } from "@/lib/types";
 
@@ -77,7 +78,7 @@ export default function CheckoutPage() {
       <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Checkout</h1>
       <form onSubmit={place} className="mt-6 grid gap-6 lg:grid-cols-[1fr_360px]">
         <div className="space-y-6">
-          <section className="card space-y-4 p-6">
+          <Pending waitingFor="POST /orders → delivery address / pickup location_id; GET /locations"><section className="card space-y-4 p-6">
             <h2 className="text-lg font-bold">1. How would you like to receive it?</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {([["delivery", Truck, "Delivery", "Home or office"], ["pickup", Building2, "Pickup", "Collect at a branch"]] as const).map(([v, I, t, d]) => (
@@ -90,7 +91,7 @@ export default function CheckoutPage() {
               ? <div><label className="label" htmlFor="a">Delivery address</label><textarea id="a" className="input min-h-24" required value={address} onChange={(e) => setAddress(e.target.value)} placeholder="House no., street, area, landmark, city" /></div>
               : <div><label className="label" htmlFor="b">Pickup branch</label><select id="b" className="input" value={branch} onChange={(e) => setBranch(e.target.value)}>{BRANCHES.map((b) => <option key={b}>{b}</option>)}</select></div>}
             <div><label className="label" htmlFor="ph">Phone for the rider / pickup</label><input id="ph" type="tel" className="input" required value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="024 000 0000" /></div>
-          </section>
+          </section></Pending>
 
           {needsRx && (
             <section className="card space-y-3 p-6">

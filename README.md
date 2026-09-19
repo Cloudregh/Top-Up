@@ -16,7 +16,7 @@ All imagery goes through `lib/images.ts` (`img(key, w, h)`). Every key currently
 To switch: upload each asset to Cloudinary with public id `topup/<key>` (keys listed in `IMAGE_KEYS`, e.g. `topup/hero`,
 `topup/cat_cough`, `topup/delivery`), then set `NEXT_PUBLIC_IMAGE_SOURCE=cloudinary` and `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`.
 Tip: the hero portrait uses `mix-blend-multiply`; a background-removed PNG (Cloudinary `e_background_removal`) will look cleaner.
-Product photos are placeholders by product type (`productImageKey`) — replace with per-product images once the API serves them.
+Product photos come only from the API's `image_url`; until it exists a neutral "Image soon" tile shows.
 
 ## Site structure (from top-uppharmacy.com)
 Home · About (About Us, Why Choose Us, FAQ's) · Services · Health Hub (Prescriptions, Book Appointment, Corporate Health, Travel Health) ·
@@ -28,16 +28,9 @@ Home · Shop (search, category, cursor pagination) · Product · Cart (live stoc
 prescription, Paystack) · Order detail (timeline, payment polling, cancel) · Orders (+reorder) · Prescriptions ·
 Account (business details, credit, statement, invoices, addresses, notifications) · Login · Register · Support widget.
 
-## Backend gaps the UI works around (flag to backend)
-- **Catalogue needs a token**, so signed-out visitors see a labelled preview (mock names, no prices/stock).
-- **No self-registration endpoint** — `/register` hands the application to the team on WhatsApp.
-- **Delivery address / pickup branch have no field** on `POST /orders`; they're stored on-device per order. `location_id` can't be chosen (no customer-readable locations list).
-- **No `GET /prescriptions` list** — ids are tracked on-device; each is fetched by id.
-- **Credit payments** aren't exposed for customer orders (option shown disabled).
-- **Category filter** maps to `products.form` (Tablet, Capsule, Syrup, Cream, Drops, Injection) — no taxonomy yet.
-- `GET /customers/{id}/statement`, `/invoices/{id}` and `PATCH /customers/{id}` are staff-auth in the OpenAPI; the UI degrades gracefully if a customer token is refused.
-- Paystack is stub-only on the backend; the redirect + polling flow is built but unverified live.
-- **Support widget**: instant in-panel reply, then WhatsApp / phone (numbers from the live site). There is no in-app live-chat backend.
+## What's real vs placeholder
+See **[docs/API-GAPS.md](docs/API-GAPS.md)**. Everything the API provides is used live; everything it doesn't is a placeholder wrapped in `<Pending waitingFor="…">`.
+Set `NEXT_PUBLIC_SHOW_PLACEHOLDERS=1` to outline them with the endpoint each is waiting for.
 
 ## Env
 See `.env.example` (Cloudinary unsigned preset needed for prescription file upload; otherwise a paste-a-link fallback is shown).

@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, MessageCircle } from "lucide-react";
 import { SUPPORT } from "@/lib/format";
+import { Pending } from "@/components/Pending";
 
 /**
  * PENDING BACKEND: no customer self-signup endpoint exists yet (accounts are
@@ -27,7 +28,7 @@ export default function RegisterPage() {
 
   return (
     <div className="container-x py-12">
-      <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="card mx-auto max-w-xl space-y-5 p-8">
+      <Pending waitingFor="POST /customer/auth/register (self-signup)" className="mx-auto max-w-xl"><form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="card mx-auto max-w-xl space-y-5 p-8">
         <div><h1 className="text-3xl font-bold tracking-tight">Create a business account</h1><p className="mt-1 text-sm text-muted">For clinics, shops and wholesalers. New accounts are approved by our team before first use.</p></div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="sm:col-span-2"><label className="label" htmlFor="n">Business name</label><input id="n" className="input" required value={f.name} onChange={set("name")} /></div>
@@ -40,7 +41,7 @@ export default function RegisterPage() {
         </div>
         <button className="btn btn-primary w-full">Submit application</button>
         <p className="text-center text-sm text-muted">Already approved? <Link href="/login" className="font-semibold text-brand">Sign in</Link></p>
-      </form>
+      </form></Pending>
     </div>
   );
 }

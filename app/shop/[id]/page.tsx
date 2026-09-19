@@ -2,7 +2,8 @@
 import { use, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, FileText, Minus, Plus, ShoppingBag } from "lucide-react";
-import { ProductArt } from "@/components/ProductArt";
+import { ProductImage } from "@/components/ProductImage";
+import { Pending } from "@/components/Pending";
 import { AVAIL, ProductCard } from "@/components/ProductCard";
 import { ErrorState, Skeleton } from "@/components/States";
 import { useAuth } from "@/components/AuthProvider";
@@ -32,7 +33,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     <div className="container-x py-8">
       <Link href="/shop" className="inline-flex items-center gap-2 text-sm font-semibold text-muted hover:text-ink"><ArrowLeft size={16} /> Back to shop</Link>
       <div className="mt-4 grid gap-6 md:grid-cols-2">
-        <div className="card grid min-h-96 place-items-center bg-mist p-8"><ProductArt name={p.name} size={260} /></div>
+        <div className="card aspect-square overflow-hidden bg-mist md:aspect-auto md:min-h-96"><ProductImage name={p.name} image_url={p.image_url} /></div>
         <div className="card flex flex-col gap-5 p-8">
           <div className="flex flex-wrap gap-2">
             <span className={`rounded-full px-3 py-1 text-xs font-semibold ${a.cls}`}>{a.label}</span>
@@ -54,9 +55,9 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
         </div>
       </div>
       {related.items.filter((r) => r.product_id !== p.product_id).length > 0 && (
-        <section className="mt-14"><h2 className="mb-5 text-2xl font-bold">You may also need</h2>
+        <section className="mt-14"><Pending waitingFor="GET /catalogue/{id} → related products"><h2 className="mb-5 text-2xl font-bold">More from the catalogue</h2>
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">{related.items.filter((r) => r.product_id !== p.product_id).slice(0, 4).map((r) => <ProductCard key={r.product_id} item={r} />)}</div>
-        </section>)}
+        </Pending></section>)}
     </div>
   );
 }

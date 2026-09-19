@@ -6,6 +6,7 @@ import { Empty, Skeleton } from "@/components/States";
 import { useToast } from "@/components/Toast";
 import { api, errInfo } from "@/lib/api";
 import { useRequireAuth } from "@/lib/hooks";
+import { Pending } from "@/components/Pending";
 import { prescriptionIds } from "@/lib/local";
 import { fmtDate, shortId } from "@/lib/format";
 import type { Prescription } from "@/lib/types";
@@ -88,7 +89,7 @@ export default function PrescriptionsPage() {
           {formErr && <p role="alert" className="rounded-2xl bg-rose-50 p-3 text-sm text-rose-800">{formErr}</p>}
         </section>
 
-        <section className="space-y-3">
+        <Pending waitingFor="GET /prescriptions (list) — ids tracked on-device meanwhile"><section className="space-y-3">
           <h2 className="text-lg font-bold">Your prescriptions</h2>
           {list === null ? <Skeleton className="h-28" /> : !list.length ? <Empty title="No prescriptions yet" hint="Upload one to get started." /> : list.map((p) => {
             const s = STATUS[p.status]; const I = s.icon;
@@ -104,7 +105,7 @@ export default function PrescriptionsPage() {
                 <span className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${s.cls}`}><I size={14} />{s.label}</span>
               </div>);
           })}
-        </section>
+        </section></Pending>
       </div>
     </div>
   );

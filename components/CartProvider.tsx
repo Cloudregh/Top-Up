@@ -4,7 +4,7 @@ import type { CatalogueItem } from "@/lib/types";
 
 export interface CartLine {
   product_id: string; name: string; pack_size: string; price_pesewa: number;
-  requires_prescription: boolean; quantity: number;
+  requires_prescription: boolean; quantity: number; image_url?: string | null;
 }
 export type Fulfilment = { mode: "delivery"; address: string; phone: string } | { mode: "pickup"; branch: string; phone: string };
 
@@ -33,7 +33,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const add = useCallback((i: CatalogueItem, qty = 1) => setLines((ls) => {
     const ex = ls.find((l) => l.product_id === i.product_id);
     if (ex) return ls.map((l) => l === ex ? { ...l, quantity: Math.min(999, l.quantity + qty), price_pesewa: i.price_pesewa } : l);
-    return [...ls, { product_id: i.product_id, name: i.name, pack_size: i.pack_size, price_pesewa: i.price_pesewa, requires_prescription: i.requires_prescription, quantity: qty }];
+    return [...ls, { product_id: i.product_id, name: i.name, pack_size: i.pack_size, price_pesewa: i.price_pesewa, requires_prescription: i.requires_prescription, quantity: qty, image_url: i.image_url }];
   }), []);
   const setQty = useCallback((id: string, qty: number) =>
     setLines((ls) => ls.map((l) => l.product_id === id ? { ...l, quantity: Math.max(1, Math.min(999, qty)) } : l)), []);

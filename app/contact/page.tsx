@@ -15,7 +15,7 @@ export default function Contact() {
         <a href={`https://wa.me/${SUPPORT.whatsapp}`} target="_blank" rel="noopener" className="tile p-6"><MessageCircle className="text-brand" /><p className="mt-3 font-semibold">WhatsApp</p><p className="text-sm text-muted">Instant replies</p></a>
         <div className="tile p-6"><Clock className="text-brand" /><p className="mt-3 font-semibold">Hours</p><p className="text-sm text-muted">Open 24/7</p></div>
       </div></Section>
-      <Section title="Our locations"><ul className="grid gap-3 md:grid-cols-3">{LOCATIONS.map((l) => <li key={l.name} className="tile flex gap-3 p-5"><MapPin className="mt-0.5 shrink-0 text-brand" size={18} /><div><p className="font-semibold">{l.name}</p><p className="text-sm text-muted">{l.addr}</p></div></li>)}</ul></Section>
+      <Section title="Our locations" waitingFor="GET /locations (customer-readable)"><ul className="grid gap-3 md:grid-cols-3">{LOCATIONS.map((l) => <li key={l.name} className="tile flex gap-3 p-5"><MapPin className="mt-0.5 shrink-0 text-brand" size={18} /><div><p className="font-semibold">{l.name}</p><p className="text-sm text-muted">{l.addr}</p></div></li>)}</ul></Section>
       <Section><div className="mx-auto max-w-2xl"><WhatsAppForm heading="Send us a message" fields={[{ name: "name", label: "Name" }, { name: "phone", label: "Phone", type: "tel" }, { name: "msg", label: "Message", textarea: true }]} /></div></Section>
     </>
   );

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { AlertTriangle, ArrowRight, FileText, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import { useCart } from "@/components/CartProvider";
-import { ProductArt } from "@/components/ProductArt";
+import { ProductImage } from "@/components/ProductImage";
 import { AVAIL } from "@/components/ProductCard";
 import { Empty, Skeleton } from "@/components/States";
 import { api } from "@/lib/api";
@@ -48,7 +48,7 @@ export default function CartPage() {
             const a = avail[l.product_id];
             return (
               <li key={l.product_id} className="card flex gap-4 p-4">
-                <div className="grid size-24 shrink-0 place-items-center rounded-2xl bg-mist"><ProductArt name={l.name} size={72} /></div>
+                <div className="size-24 shrink-0 overflow-hidden rounded-2xl bg-mist"><ProductImage name={l.name} image_url={l.image_url} /></div>
                 <div className="flex min-w-0 flex-1 flex-col">
                   <div className="flex justify-between gap-2">
                     <div className="min-w-0"><Link href={`/shop/${l.product_id}`} className="line-clamp-2 font-semibold hover:text-brand">{l.name}</Link><p className="text-sm text-muted">{l.pack_size}</p></div>

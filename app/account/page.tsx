@@ -8,6 +8,7 @@ import { ErrorState, Skeleton } from "@/components/States";
 import { useToast } from "@/components/Toast";
 import { api, errInfo } from "@/lib/api";
 import { useFetch, useRequireAuth } from "@/lib/hooks";
+import { Pending } from "@/components/Pending";
 import { addresses, notifPrefs } from "@/lib/local";
 import { fmtDate, ghs } from "@/lib/format";
 import type { Statement } from "@/lib/types";
@@ -94,7 +95,7 @@ export default function AccountPage() {
                   <td className="pl-3 text-right">{e.ref_doc_type === "invoice" && e.ref_doc_id && <Link href={`/invoices/${e.ref_doc_id}`} className="inline-flex items-center gap-1 font-semibold text-brand"><Download size={14} /> Invoice</Link>}</td></tr>))}</tbody></table></div>)}
       </section>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <Pending waitingFor="GET/PATCH /customer/me → addresses, notification preferences"><div className="grid gap-6 lg:grid-cols-2">
         <section className="card space-y-3 p-6">
           <h2 className="flex items-center gap-2 text-lg font-bold"><MapPin size={18} /> Delivery addresses</h2>
           {addrs.map((a, i) => <div key={i} className="flex items-start justify-between gap-2 rounded-2xl bg-mist p-3 text-sm"><span>{a}</span><button aria-label="Remove address" onClick={() => setAddresses(addrs.filter((_, j) => j !== i))}><Trash2 size={16} className="text-muted hover:text-rose-600" /></button></div>)}
@@ -109,7 +110,7 @@ export default function AccountPage() {
               <input type="checkbox" role="switch" checked={prefs[k]} onChange={() => togglePref(k)} className="size-5 accent-[#0a4fc4]" /></label>))}
           <p className="text-xs text-muted">Saved on this device.</p>
         </section>
-      </div>
+      </div></Pending>
     </div>
   );
 }

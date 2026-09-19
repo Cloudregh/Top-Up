@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ArrowUpRight, ChevronRight, MapPin } from "lucide-react";
 import { Img } from "./Img";
 import { CountUp } from "./CountUp";
+import { Pending } from "./Pending";
 
 export function HomeHero() {
   const root = useRef<HTMLDivElement>(null);
@@ -22,7 +23,7 @@ export function HomeHero() {
   }, []);
 
   return (
-    <section ref={root} className="gutter">
+    <Pending waitingFor="settings: branches + opening hours"><section ref={root} className="gutter">
       <div className="hero-gradient relative min-h-[500px] overflow-hidden rounded-[30px] sm:min-h-[600px] lg:min-h-[640px]">
         <h1 className="pointer-events-none absolute left-[3%] top-[4%] z-20 select-none text-[clamp(3.4rem,14.2vw,13.5rem)] font-extrabold leading-[0.95] tracking-[-0.06em] text-white" aria-label="Pharmacy">
           {"Pharmacy".split("").map((c, i) => <span key={i} className="inline-block overflow-hidden pb-[0.12em] align-top"><span data-char className="inline-block">{c}</span></span>)}
@@ -44,6 +45,6 @@ export function HomeHero() {
         </div>
         <Link href="/shop" className="btn btn-white absolute bottom-5 right-5 z-20 shadow-lg lg:hidden">Shop Now <ArrowUpRight size={15} /></Link>
       </div>
-    </section>
+    </section></Pending>
   );
 }

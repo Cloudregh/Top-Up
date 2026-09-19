@@ -2,10 +2,11 @@
 import { Suspense, use, useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { AlertCircle, ArrowLeft, Check, CheckCircle2, CircleDot, Headset, Loader2, MapPin, RefreshCw, XCircle } from "lucide-react";
+import { AlertCircle, ArrowLeft, Truck, Check, CheckCircle2, CircleDot, Headset, Loader2, MapPin, RefreshCw, XCircle } from "lucide-react";
 import { StatusPill } from "@/components/OrderStatus";
 import { ErrorState, Skeleton } from "@/components/States";
 import { useToast } from "@/components/Toast";
+import { Pending } from "@/components/Pending";
 import { api, errInfo } from "@/lib/api";
 import { useFetch, useRequireAuth } from "@/lib/hooks";
 import { fulfilment } from "@/lib/local";
@@ -102,7 +103,12 @@ function Order({ id }: { id: string }) {
         </div>
 
         <aside className="space-y-4">
-          {ful && <section className="card p-6"><h2 className="mb-2 flex items-center gap-2 font-bold"><MapPin size={16} /> {ful.mode === "delivery" ? "Delivery to" : "Pickup at"}</h2><p className="text-sm">{ful.where}</p><p className="text-sm text-muted">{ful.phone}</p></section>}
+          {ful && <Pending waitingFor="GET /orders/{id} → delivery address / pickup"><section className="card p-6"><h2 className="mb-2 flex items-center gap-2 font-bold"><MapPin size={16} /> {ful.mode === "delivery" ? "Delivery to" : "Pickup at"}</h2><p className="text-sm">{ful.where}</p><p className="text-sm text-muted">{ful.phone}</p></section></Pending>}
+          {!cancelled && (
+            <Pending waitingFor="GET /orders/{id}/tracking → delivery status, ETA, rider (WP16)">
+              <section className="card p-6"><h2 className="mb-2 flex items-center gap-2 font-bold"><Truck size={16} /> Delivery</h2>
+                <p className="text-sm text-muted">Estimated delivery and live tracking will appear here once your order is dispatched.</p></section>
+            </Pending>)}
           <section className="card space-y-3 p-6">
             {unpaid && <button className="btn btn-primary w-full" disabled={!!busy} onClick={() => act("pay")}>{busy === "pay" && <Loader2 size={16} className="animate-spin" />} Pay {ghs(order.total_pesewa)}</button>}
             {unpaid && poll === "idle" && <button className="btn btn-soft w-full" onClick={() => { tries.current = 0; setPoll("checking"); }}><RefreshCw size={16} /> I&apos;ve paid — check status</button>}

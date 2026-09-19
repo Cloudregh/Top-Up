@@ -15,7 +15,7 @@ export default function Why() {
   return (
     <>
       <InfoHero eyebrow="Why Choose Us" title="Whatever you need… 24/7" intro="Quality healthcare products and services, backed by people who care." image="about_pharmacist" />
-      <Section><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{REASONS.map(([I, t, d]) => <div key={t} className="tile p-6"><span className="grid size-11 place-items-center rounded-full bg-white text-brand"><I size={20} /></span><h3 className="mt-4 font-semibold">{t}</h3><p className="mt-1 text-sm text-muted">{d}</p></div>)}</div><div className="mt-8"><Cta href="/shop">Start shopping</Cta></div></Section>
+      <Section waitingFor="CMS: why-choose-us"><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{REASONS.map(([I, t, d]) => <div key={t} className="tile p-6"><span className="grid size-11 place-items-center rounded-full bg-white text-brand"><I size={20} /></span><h3 className="mt-4 font-semibold">{t}</h3><p className="mt-1 text-sm text-muted">{d}</p></div>)}</div><div className="mt-8"><Cta href="/shop">Start shopping</Cta></div></Section>
     </>
   );
 }
