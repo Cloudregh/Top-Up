@@ -23,12 +23,12 @@ export function HomeHero() {
 
   return (
     <section ref={root} className="gutter">
-      <div className="hero-gradient relative min-h-[540px] overflow-hidden rounded-[30px] sm:min-h-[600px] lg:min-h-[640px]">
+      <div className="hero-gradient relative min-h-[500px] overflow-hidden rounded-[30px] sm:min-h-[600px] lg:min-h-[640px]">
         <h1 className="pointer-events-none absolute left-[3%] top-[4%] z-20 select-none text-[clamp(3.4rem,14.2vw,13.5rem)] font-extrabold leading-[0.95] tracking-[-0.06em] text-white" aria-label="Pharmacy">
           {"Pharmacy".split("").map((c, i) => <span key={i} className="inline-block overflow-hidden pb-[0.12em] align-top"><span data-char className="inline-block">{c}</span></span>)}
         </h1>
 
-        <div data-person className="absolute bottom-0 right-[-14%] z-10 h-[74%] w-[80%] sm:right-0 sm:h-[90%] sm:w-[46%] lg:w-[38%]">
+        <div data-person className="absolute bottom-0 right-[-4%] z-10 h-[72%] w-[74%] sm:right-0 sm:h-[90%] sm:w-[46%] lg:w-[38%]">
           <Img k="hero" w={1000} priority alt="Top-Up pharmacist" className="hero-person size-full object-cover object-top" />
         </div>
 

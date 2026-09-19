@@ -33,7 +33,7 @@ export function ProductCard({ item, preview = false }: { item: CatalogueItem; pr
     <div className="tile group flex h-full flex-col p-4 transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-25px_rgba(1,37,147,.45)]">
       <Link href={preview ? "/login" : `/shop/${item.product_id}`} className="block">
         <div className="flex items-start justify-between gap-2">
-          <div className="min-w-0"><h3 className="line-clamp-1 text-sm font-semibold">{item.name}</h3><p className="text-xs text-muted">{item.pack_size}</p></div>
+          <div className="min-w-0"><h3 className="line-clamp-2 text-sm font-semibold leading-snug">{item.name}</h3><p className="text-xs text-muted">{item.pack_size}</p></div>
           {item.requires_prescription && <span className="flex shrink-0 items-center gap-1 rounded-full bg-white px-2 py-1 text-[11px] font-semibold text-brand"><FileText size={11} /> Rx</span>}
         </div>
         <div className="relative mt-3 aspect-square overflow-hidden rounded-[20px] bg-white">
@@ -41,15 +41,15 @@ export function ProductCard({ item, preview = false }: { item: CatalogueItem; pr
           {!preview && <span className={`absolute bottom-2 left-2 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold backdrop-blur ${a.cls}`}><i className={`size-1.5 rounded-full ${a.dot}`} />{a.label}</span>}
         </div>
       </Link>
-      <div className="mt-auto flex items-center justify-between gap-2 pt-4">
+      <div className="mt-auto flex flex-wrap items-center justify-between gap-x-2 gap-y-2 pt-4">
         {preview ? (
-          <><span className="text-xs text-muted">Sign in for price</span><Link href="/login" className="btn btn-white !px-4 !py-2 text-xs">Sign in</Link></>
+          <><span className="text-xs text-muted">Price after sign in</span><Link href="/login" className="btn btn-white !px-4 !py-2 text-xs">Sign in</Link></>
         ) : (
           <>
             <span className="text-lg font-bold tracking-tight">{ghs(item.price_pesewa)}</span>
             <button className="btn btn-white !px-4 !py-2 text-xs" disabled={item.availability === "out_of_stock"} aria-label={`Add ${item.name} to cart`}
               onClick={() => { add(item); setDone(true); toast(`${item.name} added`); setTimeout(() => setDone(false), 1200); }}>
-              {done ? <Check size={14} /> : <ShoppingBag size={14} />} {done ? "Added" : "Shop Now"}
+              {done ? <Check size={14} /> : <ShoppingBag size={14} />}<span className="hidden min-[420px]:inline">{done ? "Added" : "Shop Now"}</span>
             </button>
           </>
         )}

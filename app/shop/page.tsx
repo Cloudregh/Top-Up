@@ -27,7 +27,7 @@ function Shop() {
       <Reveal><h1 className="text-4xl font-bold tracking-tight sm:text-6xl">Shop</h1></Reveal>
       <div className="card mt-6 flex items-center gap-3 px-5 py-3">
         <Search className="text-muted" size={20} />
-        <input ref={input} value={text} onChange={(e) => setText(e.target.value)} placeholder="Search medicines, brands, health needs…" aria-label="Search products" className="w-full bg-transparent py-2 outline-none" />
+        <input ref={input} value={text} onChange={(e) => setText(e.target.value)} placeholder="Search medicines & health needs" aria-label="Search products" className="w-full bg-transparent py-2 outline-none" />
         {text && <button onClick={() => setText("")} aria-label="Clear search" className="rounded-full p-1 hover:bg-mist"><X size={18} /></button>}
       </div>
       <div className="mt-4 flex gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Categories">
