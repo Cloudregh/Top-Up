@@ -52,7 +52,7 @@ export function HomeHero() {
           </h1>
 
           {/* Top-Up mark as the translucent brand shape */}
-          <div data-mark aria-hidden className="absolute left-[76%] top-[2.5%] z-0 aspect-square w-[20%] bg-white/45 sm:left-[49%] sm:top-[4%] sm:w-[17%]"
+          <div data-mark aria-hidden className="absolute left-[81%] top-[3.5%] z-0 aspect-square w-[15%] bg-white/45 sm:left-[53%] sm:top-[3.5%] sm:w-[12%]"
             style={{ WebkitMask: "url(/logo-mark-v2.png) center / contain no-repeat", mask: "url(/logo-mark-v2.png) center / contain no-repeat" }} />
 
           {/* person (cut-out) overlaps the wordmark */}
