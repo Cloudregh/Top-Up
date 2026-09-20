@@ -33,7 +33,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     <div className="container-x py-8">
       <Link href="/shop" className="inline-flex items-center gap-2 text-sm font-semibold text-muted hover:text-ink"><ArrowLeft size={16} /> Back to shop</Link>
       <div className="mt-4 grid gap-6 md:grid-cols-2">
-        <div className="card aspect-square overflow-hidden bg-mist md:aspect-auto md:min-h-96"><ProductImage name={p.name} image_url={p.image_url} /></div>
+        <div className="card aspect-square overflow-hidden bg-mist md:aspect-auto md:min-h-96"><ProductImage name={p.name} /></div>
         <div className="card flex flex-col gap-5 p-8">
           <div className="flex flex-wrap gap-2">
             <span className={`rounded-full px-3 py-1 text-xs font-semibold ${a.cls}`}>{a.label}</span>

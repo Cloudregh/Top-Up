@@ -73,7 +73,7 @@ export default function HomePage() {
       {/* Best sellers */}
       <section className="mt-24 gutter">
         <Reveal><h2 className={`${H2} text-center`}>Our Products</h2></Reveal>
-        <div className="mt-10"><Pending waitingFor="GET /catalogue → best_seller flag"><Grid items={sellers} gated={cat.gated} loading={cat.loading} error={cat.error} retry={cat.retry} n={8} /></Pending></div>
+        <div className="mt-10"><Pending waitingFor="GET /catalogue → best-seller flag (not in the API)"><Grid items={sellers} gated={cat.gated} loading={cat.loading} error={cat.error} retry={cat.retry} n={8} /></Pending></div>
         <div className="mt-8 flex justify-center"><SeeMore /></div>
       </section>
 

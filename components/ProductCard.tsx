@@ -28,7 +28,7 @@ export function ProductCard({ item }: { item: CatalogueItem }) {
           {item.requires_prescription && <span className="flex shrink-0 items-center gap-1 rounded-full bg-white px-2 py-1 text-[11px] font-semibold text-brand"><FileText size={11} /> Rx</span>}
         </div>
         <div className="relative mt-3 aspect-square overflow-hidden rounded-[20px] bg-white">
-          <div className="size-full transition duration-700 group-hover:scale-110"><ProductImage name={item.name} image_url={item.image_url} /></div>
+          <div className="size-full transition duration-700 group-hover:scale-110"><ProductImage name={item.name} /></div>
           <span className={`absolute bottom-2 left-2 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold backdrop-blur ${a.cls}`}><i className={`size-1.5 rounded-full ${a.dot}`} />{a.label}</span>
         </div>
       </Link>

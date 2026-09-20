@@ -1,7 +1,4 @@
-import { mockApi } from "./mock";
-
 const BASE = "/api/v1";
-export const DEMO = process.env.NEXT_PUBLIC_DEMO === "1";
 
 let accessToken: string | null = null;
 export const setToken = (t: string | null) => { accessToken = t; };
@@ -22,7 +19,6 @@ async function toError(res: Response) {
 
 let refreshing: Promise<boolean> | null = null;
 export function refreshSession(): Promise<boolean> {
-  if (DEMO) return Promise.resolve(mockApi.hasSession());
   refreshing ??= (async () => {
     try {
       const res = await fetch(`${BASE}/customer/auth/refresh`, { method: "POST", credentials: "include" });
@@ -38,8 +34,6 @@ interface Opts { method?: string; body?: unknown; idempotencyKey?: string; auth?
 
 export async function api<T = unknown>(path: string, o: Opts = {}): Promise<T> {
   const method = o.method ?? "GET";
-  if (DEMO) return mockApi.handle<T>(path, method, o.body);
-
   const go = () => fetch(BASE + path, {
     method, credentials: "include", signal: o.signal,
     headers: {

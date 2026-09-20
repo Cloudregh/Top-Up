@@ -18,9 +18,8 @@ wrapper (grep for it) — remove the wrapper when the API supplies the data.
 
 Signed-out visitors get **placeholder tiles** (no invented products) because `GET /catalogue` needs a token.
 
-## Read from the API when present (fields don't exist yet)
-`CatalogueItem.image_url` (product photos — a neutral "Image soon" placeholder shows until then),
-`featured`, `best_seller` (home sections currently fall back to the first catalogue items), `category`.
+## Not read yet (not in the OpenAPI file)
+Product images (an "Image soon" placeholder shows), `featured`/`best_seller` flags (home sections show the first catalogue items), category.
 
 ## Placeholders — waiting on the API
 | UI | Waiting for |

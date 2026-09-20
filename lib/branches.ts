@@ -1,7 +1,8 @@
 // Branch list supplied by Top-Up (Google Business listings). PLACEHOLDER until a
 // customer-readable GET /locations exists; then replace this file's data with the API.
-export type Region = "Accra" | "Tema" | "Other regions";
-export interface Branch { name: string; area: string; region: Region; phone: string; hours: string; delivery?: boolean; wholesale?: boolean }
+export type Region = "Accra" | "Tema" | "Kumasi" | "Other regions";
+// phone/hours optional: the card falls back to the main hotline / hides hours until supplied.
+export interface Branch { name: string; area: string; region: Region; phone?: string; hours?: string; delivery?: boolean; wholesale?: boolean }
 
 export const BRANCHES_LIST: Branch[] = [
   { name: "Tema Community 9", area: "Hospital Road, Community 9, Tema", region: "Tema", phone: "0204355201", hours: "Open 24 hours" },
@@ -21,10 +22,11 @@ export const BRANCHES_LIST: Branch[] = [
   { name: "Kasoa", area: "Kasoa New Market Rd", region: "Other regions", phone: "0501583364", hours: "Closes 10 pm", delivery: true },
   { name: "Ho", area: "Ho, Volta Region", region: "Other regions", phone: "0202411437", hours: "Open 24 hours", delivery: true },
   { name: "Takoradi", area: "Adiembra Rd, Sekondi-Takoradi", region: "Other regions", phone: "0531012798", hours: "Closes 10 pm" },
-  { name: "Adum, Kumasi", area: "Osei Tutu I Ave, Adum", region: "Other regions", phone: "0509253029", hours: "Open 24 hours", delivery: true },
+  { name: "Adum, Kumasi", area: "Osei Tutu I Ave, Adum, Kumasi", region: "Kumasi", phone: "0509253029", hours: "Open 24 hours", delivery: true },
+  { name: "Abuakwa, Kumasi", area: "Asenemaso, Abuakwa, Kumasi", region: "Kumasi" },
 ];
 
-export const REGIONS: Region[] = ["Accra", "Tema", "Other regions"];
+export const REGIONS: Region[] = ["Accra", "Tema", "Kumasi", "Other regions"];
 export const telHref = (p: string) => `tel:+233${p.replace(/^0/, "")}`;
 export const prettyPhone = (p: string) => `${p.slice(0, 3)} ${p.slice(3, 6)} ${p.slice(6)}`;
 export const mapsHref = (b: Branch) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`Top-Up Pharmacy ${b.name} ${b.area}`)}`;

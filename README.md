@@ -9,14 +9,14 @@ cp .env.example .env.local   # then edit
 npm run dev                  # http://localhost:3000
 ```
 
-Set `NEXT_PUBLIC_DEMO=1` to run the whole customer flow against an in-browser mock (any email/password logs in).
+There is no mock mode: the app only calls routes defined in the OpenAPI file (Pharma Distribution API).
 
 ## Images (Pexels now, Cloudinary later)
 All imagery goes through `lib/images.ts` (`img(key, w, h)`). Every key currently points at a Pexels placeholder.
 To switch: upload each asset to Cloudinary with public id `topup/<key>` (keys listed in `IMAGE_KEYS`, e.g. `topup/hero`,
 `topup/cat_cough`, `topup/delivery`), then set `NEXT_PUBLIC_IMAGE_SOURCE=cloudinary` and `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`.
 Tip: the hero portrait uses `mix-blend-multiply`; a background-removed PNG (Cloudinary `e_background_removal`) will look cleaner.
-Product photos come only from the API's `image_url`; until it exists a neutral "Image soon" tile shows.
+Product photos: the catalogue API has no image field, so a neutral "Image soon" tile shows.
 
 **Using Top-Up's own photos (e.g. from Instagram):** Instagram doesn't allow automated downloads, so save the photos you want
 and drop them in `public/images/`, then map a key in `LOCAL` (`lib/images.ts`), e.g. `about_counter: "/images/tema-branch.jpg"`.

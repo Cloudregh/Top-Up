@@ -8,13 +8,6 @@ export interface CatalogueItem {
   price_pesewa: number;
   availability: Availability;
   requires_prescription: boolean;
-  // --- NOT in the API yet: read if/when it is added; UI shows placeholders until then ---
-  image_url?: string | null;
-  featured?: boolean;
-  best_seller?: boolean;
-  category?: string | null;
-  /** demo-mode only */
-  form?: string;
 }
 export interface Page<T> { data: T[]; next_cursor: string | null }
 

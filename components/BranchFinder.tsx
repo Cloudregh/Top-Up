@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Clock, MapPin, Navigation, Phone, Truck } from "lucide-react";
 import { BRANCHES_LIST, REGIONS, mapsHref, prettyPhone, telHref, type Region } from "@/lib/branches";
+import { SUPPORT } from "@/lib/format";
 import { Pending } from "./Pending";
 
 export function BranchFinder({ compact = false }: { compact?: boolean }) {
@@ -26,10 +27,12 @@ export function BranchFinder({ compact = false }: { compact?: boolean }) {
                 {b.wholesale && <span className="shrink-0 rounded-full bg-white px-2 py-0.5 text-[11px] font-semibold text-brand">Wholesale</span>}
               </div>
               <p className="mt-2 flex gap-2 text-sm text-muted"><MapPin size={15} className="mt-0.5 shrink-0" />{b.area}</p>
-              <p className="mt-1.5 flex gap-2 text-sm text-muted"><Clock size={15} className="mt-0.5 shrink-0" />{b.hours}</p>
+              {b.hours && <p className="mt-1.5 flex gap-2 text-sm text-muted"><Clock size={15} className="mt-0.5 shrink-0" />{b.hours}</p>}
               {b.delivery && <p className="mt-1.5 flex gap-2 text-sm text-muted"><Truck size={15} className="mt-0.5 shrink-0" />Delivery available</p>}
               <div className="mt-auto flex gap-2 pt-4">
-                <a href={telHref(b.phone)} className="btn btn-white flex-1 px-3! py-2! text-xs"><Phone size={13} /> {prettyPhone(b.phone)}</a>
+                {b.phone
+                  ? <a href={telHref(b.phone)} className="btn btn-white flex-1 px-3! py-2! text-xs"><Phone size={13} /> {prettyPhone(b.phone)}</a>
+                  : <a href={`tel:+${SUPPORT.phone}`} className="btn btn-white flex-1 px-3! py-2! text-xs"><Phone size={13} /> Call main line</a>}
                 <a href={mapsHref(b)} target="_blank" rel="noopener" className="btn btn-primary px-3! py-2! text-xs" aria-label={`Directions to ${b.name}`}><Navigation size={13} /> Directions</a>
               </div>
             </li>
