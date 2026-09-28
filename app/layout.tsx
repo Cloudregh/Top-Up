@@ -24,15 +24,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-dvh antialiased">
         <AuthProvider>
           <LocationProvider>
-          <CartProvider>
-            <ToastProvider>
-              <SmoothScroll />
-              <Header />
-              <main className="pb-16">{children}</main>
-              <Footer />
-              <SupportWidget />
-            </ToastProvider>
-          </CartProvider>
+            <CartProvider>
+              <ToastProvider>
+                <SmoothScroll />
+                <Header />
+                <main className="pb-16">{children}</main>
+                <Footer />
+                <SupportWidget />
+              </ToastProvider>
+            </CartProvider>
           </LocationProvider>
         </AuthProvider>
       </body>
