@@ -3,6 +3,7 @@ import { use, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, FileText, Minus, Plus, ShoppingBag } from "lucide-react";
 import { ProductImage } from "@/components/ProductImage";
+import { NearbyStock } from "@/components/NearbyStock";
 import { Pending } from "@/components/Pending";
 import { AVAIL, ProductCard } from "@/components/ProductCard";
 import { ErrorState, Skeleton } from "@/components/States";
@@ -54,6 +55,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
           </div>
         </div>
       </div>
+      <NearbyStock product={p} />
       {related.items.filter((r) => r.product_id !== p.product_id).length > 0 && (
         <section className="mt-14"><Pending waitingFor="GET /catalogue/{id} → related products"><h2 className="mb-5 text-2xl font-bold">More from the catalogue</h2>
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">{related.items.filter((r) => r.product_id !== p.product_id).slice(0, 4).map((r) => <ProductCard key={r.product_id} item={r} />)}</div>
