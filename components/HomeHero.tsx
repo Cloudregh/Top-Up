@@ -2,7 +2,8 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ArrowUpRight, ChevronRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { HeroBranchCard } from "./HeroBranchCard";
 import { Img } from "./Img";
 import { Pending } from "./Pending";
 
@@ -62,15 +63,7 @@ export function HomeHero() {
 
           {/* info card */}
           <div data-card className="absolute bottom-4 left-4 z-30 w-[58%] max-w-56 rounded-[20px] bg-white p-3.5 shadow-xl sm:bottom-[8%] sm:left-[3.5%] sm:w-62.5 sm:max-w-none sm:rounded-[22px] sm:p-5">
-            <div className="flex items-center justify-between"><span className="whitespace-nowrap text-xs font-semibold sm:text-sm">Pharmacy hours</span><span className="rounded-full bg-[#dff1e4] px-2.5 py-0.5 text-[11px] font-bold text-leaf sm:px-3 sm:py-1 sm:text-xs">Open</span></div>
-            <div className="mt-3 hidden items-center gap-2.5 text-xs sm:flex">
-              <span className="grid size-9 shrink-0 place-items-center rounded-full bg-mist"><span className="size-5 bg-brand" style={{ WebkitMask: "url(/logo-mark-v2.png) center / contain no-repeat", mask: "url(/logo-mark-v2.png) center / contain no-repeat" }} /></span>
-              <span className="flex-1 font-medium">Tema · Accra · Kumasi</span><ChevronRight size={14} />
-            </div>
-            <div className="mt-2.5 flex items-end justify-between sm:mt-3">
-              <p className="text-4xl font-medium leading-none tracking-tighter sm:text-6xl">24/7<span className="ml-1 text-sm font-normal text-muted">/open</span></p>
-              <span className="mb-1 flex flex-col gap-1.5" aria-hidden><i className="size-1.5 rounded-full bg-ink/20" /><i className="size-1.5 rounded-full bg-ink" /><i className="size-1.5 rounded-full bg-ink/20" /></span>
-            </div>
+            <HeroBranchCard />
           </div>
 
           {/* description + CTA */}
