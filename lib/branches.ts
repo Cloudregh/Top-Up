@@ -1,4 +1,3 @@
-import { api } from "./api";
 import { distanceKm, type Coords } from "./geo";
 import type { Availability } from "./types";
 
@@ -43,13 +42,13 @@ export const nearestBranches = (from: Coords, n = 3) =>
     .sort((x, y) => x.km - y.km)
     .slice(0, n);
 
+/** Enough of a product to show its stock (catalogue items and cart lines both fit). */
+export interface StockItem { product_id: string; name: string; availability?: Availability }
+
 /**
- * Per-branch stock for one product, keyed by branch name. PROPOSED endpoint (not in the OpenAPI file yet):
- * GET /catalogue/{id}/locations → { data: [{ location_name, availability }] }. Resolves null until it exists.
+ * Stock of an item at a branch. The API has no per-branch stock yet (don't call an endpoint that 404s):
+ * an item out of stock network-wide is out everywhere, anything else is `null` → "call to confirm".
+ * When the API adds it, take the branch here too.
  */
-export async function branchStock(productId: string): Promise<Record<string, Availability> | null> {
-  try {
-    const r = await api<{ data: { location_name: string; availability: Availability }[] }>(`/catalogue/${productId}/locations`);
-    return Object.fromEntries(r.data.map((x) => [x.location_name, x.availability]));
-  } catch { return null; }
-}
+export const stockAt = (item: StockItem): Availability | null =>
+  item.availability === "out_of_stock" ? "out_of_stock" : null;

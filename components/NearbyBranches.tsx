@@ -1,10 +1,9 @@
 "use client";
 import Link from "next/link";
 import { LocateFixed, MapPin, Navigation, Phone } from "lucide-react";
-import { mapsHref, nearestBranches, prettyPhone, telHref } from "@/lib/branches";
+import { mapsHref, nearestBranches, prettyPhone, stockAt, telHref, type StockItem } from "@/lib/branches";
 import { inGhana, prettyKm } from "@/lib/geo";
 import { SUPPORT } from "@/lib/format";
-import { useBranchStock, type StockItem } from "@/lib/hooks";
 import type { Availability } from "@/lib/types";
 import { AVAIL } from "./ProductCard";
 import { ChangeLocation } from "./ChangeLocation";
@@ -18,7 +17,6 @@ const Stock = ({ a, long }: { a: Availability | null; long?: boolean }) =>
 /** The three branches closest to the customer (or who they're buying for), with each item's stock there. */
 export function NearbyBranches({ items, className = "" }: { items: StockItem[]; className?: string }) {
   const { coords, state, locate, place } = useLocation();
-  const at = useBranchStock(items);
 
   return (
     <section className={className}>
@@ -45,9 +43,9 @@ export function NearbyBranches({ items, className = "" }: { items: StockItem[]; 
                 </div>
                 <p className="mt-2 flex gap-2 text-sm text-muted"><MapPin size={15} className="mt-0.5 shrink-0" />{b.area}</p>
                 {items.length === 1
-                  ? <span className="mt-3 self-start"><Stock a={at(items[0], b.name)} long /></span>
+                  ? <span className="mt-3 self-start"><Stock a={stockAt(items[0])} long /></span>
                   : <ul className="mt-3 space-y-1.5">{items.map((it) => (
-                      <li key={it.product_id} className="flex items-center gap-2 text-xs"><span className="min-w-0 flex-1 truncate">{it.name}</span><Stock a={at(it, b.name)} /></li>
+                      <li key={it.product_id} className="flex items-center gap-2 text-xs"><span className="min-w-0 flex-1 truncate">{it.name}</span><Stock a={stockAt(it)} /></li>
                     ))}</ul>}
                 <div className="mt-auto flex gap-2 pt-4">
                   <a href={b.phone ? telHref(b.phone) : `tel:+${SUPPORT.phone}`} className="btn btn-white flex-1 px-3! py-2! text-xs"><Phone size={13} /> {b.phone ? prettyPhone(b.phone) : "Call main line"}</a>

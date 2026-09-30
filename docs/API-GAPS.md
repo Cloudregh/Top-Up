@@ -29,7 +29,7 @@ Product images (an "Image soon" placeholder shows), `featured`/`best_seller` fla
 | Related products (product page) | related-products field/endpoint |
 | Shop category chips | `GET /catalogue/categories` (chips are guesses at `products.form`) |
 | Checkout delivery address / pickup branch | fields on `POST /orders` + customer-readable `GET /locations` (currently saved on-device per order, and the branch list is a constant) |
-| Home hero nearest-branch card (signed in), product + cart "Branches near you", pickup dropdown sorted by distance | per-branch stock `GET /catalogue/{id}/locations` (proposed; shows "Call to confirm stock" until then) + real coordinates on `GET /locations` (branch lat/lng in `lib/branches.ts` are approximate). The customer's position comes from the browser after sign-in and is never sent to the API |
+| Home hero nearest-branch card (signed in), product + cart "Branches near you", pickup dropdown sorted by distance | per-branch stock (not requested yet — shows "Call to confirm stock"; wire it into `stockAt` in `lib/branches.ts`) + real coordinates on `GET /locations` (branch lat/lng in `lib/branches.ts` are approximate). The customer's position comes from the browser after sign-in and is never sent to the API |
 | Order "Delivery" card (ETA, live tracking, rider) | delivery detail on `GET /orders/{id}/tracking` (WP16) |
 | Saved addresses, notification preferences | customer profile endpoints (kept on-device) |
 | Prescriptions list | `GET /prescriptions` (ids kept on-device, each fetched by id) |
