@@ -8,6 +8,7 @@ import { ToastProvider } from "@/components/Toast";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { NearestPopup } from "@/components/NearestPopup";
 import { SupportWidget } from "@/components/SupportWidget";
 
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta", display: "swap" });
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <main className="pb-16">{children}</main>
                 <Footer />
                 <SupportWidget />
+                <NearestPopup />
               </ToastProvider>
             </CartProvider>
           </LocationProvider>

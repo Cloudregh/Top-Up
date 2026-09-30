@@ -1,11 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { LocateFixed, MapPin, Navigation, Phone } from "lucide-react";
-import { branchStock, mapsHref, nearestBranches, prettyPhone, telHref } from "@/lib/branches";
-import { prettyKm } from "@/lib/geo";
+import { mapsHref, nearestBranches, prettyPhone, telHref } from "@/lib/branches";
+import { inGhana, prettyKm } from "@/lib/geo";
 import { SUPPORT } from "@/lib/format";
-import type { Availability, CatalogueItem } from "@/lib/types";
+import { useBranchStock } from "@/lib/hooks";
+import type { CatalogueItem } from "@/lib/types";
 import { AVAIL } from "./ProductCard";
 import { Pending } from "./Pending";
 import { Skeleton } from "./States";
@@ -13,34 +13,31 @@ import { useLocation } from "./LocationProvider";
 
 /** The customer's closest branches and whether each has this product. */
 export function NearbyStock({ product }: { product: CatalogueItem }) {
-  const { coords, state, locate } = useLocation();
-  const [stock, setStock] = useState<Record<string, Availability> | null>(null);
-
-  useEffect(() => {
-    let live = true;
-    branchStock(product.product_id).then((s) => live && setStock(s));
-    return () => { live = false; };
-  }, [product.product_id]);
-
-  // Until per-branch stock exists, an out-of-stock product is out everywhere; otherwise ask the branch.
-  const at = (name: string): Availability | null => stock?.[name] ?? (product.availability === "out_of_stock" ? "out_of_stock" : null);
+  const { coords, state, locate, place, showNearest } = useLocation();
+  const at = useBranchStock([product]);
+  const change = <button onClick={() => showNearest(product)} className="flex items-center gap-1.5 text-sm font-semibold text-brand hover:underline"><MapPin size={14} /> {place ? `For someone in ${place.name} · Change` : "Buying for someone? Change location"}</button>;
 
   return (
     <section className="mt-14">
-      <h2 className="mb-5 text-2xl font-bold">Branches near you</h2>
+      <div className="mb-5 flex flex-wrap items-end justify-between gap-3"><h2 className="text-2xl font-bold">{place ? `Branches near ${place.name}` : "Branches near you"}</h2>{coords && change}</div>
       {!coords ? (
         state === "locating" || state === "idle"
           ? <div className="grid gap-3 sm:grid-cols-3">{[0, 1, 2].map((i) => <Skeleton key={i} className="h-40" />)}</div>
           : <div className="card flex flex-wrap items-center gap-4 p-6 text-sm text-muted">
-              <p className="flex-1">{state === "denied" ? "Allow location access to see which nearby branches have this in stock." : "We couldn't get your location."}</p>
+              <p className="flex-1">{state === "denied" ? "Allow location access, or choose a town, to see which nearby branches have this in stock." : "We couldn't get your location."}</p>
               <button className="btn btn-white px-4! py-2! text-xs" onClick={locate}><LocateFixed size={14} /> Use my location</button>
-              <Link href="/contact" className="text-xs font-semibold underline">See all branches</Link>
+              {change}
             </div>
+      ) : !inGhana(coords) ? (
+        <div className="card flex flex-wrap items-center gap-4 p-6 text-sm text-muted">
+          <p className="flex-1"><b className="block text-base text-ink">Our branches aren&apos;t in your area</b>Top-Up Pharmacy branches are only in Ghana. <Link href="/contact" className="font-semibold underline">See all branches</Link></p>
+          {change}
+        </div>
       ) : (
         <Pending waitingFor="per-branch stock (GET /catalogue/{id}/locations) + GET /locations coordinates">
           <ul className="grid gap-3 sm:grid-cols-3">
             {nearestBranches(coords).map((b) => {
-              const a = at(b.name);
+              const a = at(product, b.name);
               return (
                 <li key={b.name} className="tile flex flex-col p-5">
                   <div className="flex items-start justify-between gap-2">

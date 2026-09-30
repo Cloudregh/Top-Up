@@ -9,6 +9,7 @@ import { ProductImage } from "@/components/ProductImage";
 import { AVAIL } from "@/components/ProductCard";
 import { Empty, Skeleton } from "@/components/States";
 import { FulfilmentPicker } from "@/components/FulfilmentPicker";
+import { NearestBranchCard } from "@/components/NearestPopup";
 import { api } from "@/lib/api";
 import { ghs } from "@/lib/format";
 import { useState } from "react";
@@ -75,7 +76,8 @@ export default function CartPage() {
         </ul>
         <FulfilmentPicker />
         </div>
-        <aside className="card h-fit space-y-4 p-6 lg:sticky lg:top-28">
+        <div className="h-fit space-y-6 lg:sticky lg:top-28">
+        <aside className="card space-y-4 p-6">
           <h2 className="text-lg font-bold">Summary</h2>
           <div className="flex justify-between text-sm"><span className="text-muted">Subtotal</span><span>{ghs(total)}</span></div>
           <div className="flex justify-between border-t border-mist pt-4 text-lg font-bold"><span>Total</span><span>{ghs(total)}</span></div>
@@ -85,6 +87,8 @@ export default function CartPage() {
             onClick={() => router.push(status === "authed" ? "/checkout" : "/login?next=/checkout")}><ShoppingBag size={18} /> Checkout <ArrowRight size={16} /></button>
           <p className="text-center text-xs text-muted">Final price is confirmed when your order is placed.</p>
         </aside>
+        {status === "authed" && <NearestBranchCard className="card" items={lines.map((l) => ({ product_id: l.product_id, name: l.name, availability: avail[l.product_id] }))} />}
+        </div>
       </div>
     </div>
   );

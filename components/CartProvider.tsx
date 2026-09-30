@@ -1,6 +1,7 @@
 "use client";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import type { CatalogueItem } from "@/lib/types";
+import { useLocation } from "./LocationProvider";
 
 export interface CartLine {
   product_id: string; name: string; pack_size: string; price_pesewa: number;
@@ -23,6 +24,7 @@ const KEY = "topup.cart.v1";
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([]);
   const [hydrated, setHydrated] = useState(false);
+  const { showNearest } = useLocation();
 
   useEffect(() => {
     try { setLines(JSON.parse(localStorage.getItem(KEY) || "[]")); } catch { /* corrupt */ }
@@ -30,11 +32,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, []);
   useEffect(() => { if (hydrated) try { localStorage.setItem(KEY, JSON.stringify(lines)); } catch { /* quota */ } }, [lines, hydrated]);
 
-  const add = useCallback((i: CatalogueItem, qty = 1) => setLines((ls) => {
-    const ex = ls.find((l) => l.product_id === i.product_id);
-    if (ex) return ls.map((l) => l === ex ? { ...l, quantity: Math.min(999, l.quantity + qty), price_pesewa: i.price_pesewa } : l);
-    return [...ls, { product_id: i.product_id, name: i.name, pack_size: i.pack_size, price_pesewa: i.price_pesewa, requires_prescription: i.requires_prescription, quantity: qty }];
-  }), []);
+  const add = useCallback((i: CatalogueItem, qty = 1) => {
+    setLines((ls) => {
+      const ex = ls.find((l) => l.product_id === i.product_id);
+      if (ex) return ls.map((l) => l === ex ? { ...l, quantity: Math.min(999, l.quantity + qty), price_pesewa: i.price_pesewa } : l);
+      return [...ls, { product_id: i.product_id, name: i.name, pack_size: i.pack_size, price_pesewa: i.price_pesewa, requires_prescription: i.requires_prescription, quantity: qty }];
+    });
+    showNearest(i); // where to get it: nearest branch + its stock of this item
+  }, [showNearest]);
   const setQty = useCallback((id: string, qty: number) =>
     setLines((ls) => ls.map((l) => l.product_id === id ? { ...l, quantity: Math.max(1, Math.min(999, qty)) } : l)), []);
   const remove = useCallback((id: string) => setLines((ls) => ls.filter((l) => l.product_id !== id)), []);

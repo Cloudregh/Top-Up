@@ -1,7 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Building2, Truck } from "lucide-react";
-import { BRANCHES, addresses, fulfilPref, type FulfilPref } from "@/lib/local";
+import { BranchSelect } from "./BranchSelect";
+import { Select } from "./Select";
+import { addresses, fulfilPref, type FulfilPref } from "@/lib/local";
 
 /** Delivery-or-pickup choice. Persisted on-device; pre-fills checkout. */
 export function FulfilmentPicker() {
@@ -23,11 +25,11 @@ export function FulfilmentPicker() {
       {p.mode === "delivery" ? (
         <div>
           <label className="label" htmlFor="c-addr">Delivery address</label>
-          {saved.length > 0 && <select className="input mb-2" aria-label="Saved addresses" value="" onChange={(e) => e.target.value && up({ address: e.target.value })}><option value="">Use a saved address…</option>{saved.map((a) => <option key={a}>{a}</option>)}</select>}
+          {saved.length > 0 && <div className="mb-2"><Select aria-label="Saved addresses" value="" placeholder="Use a saved address…" onChange={(address) => up({ address })} options={saved.map((a) => ({ value: a, label: a }))} /></div>}
           <textarea id="c-addr" className="input min-h-20" value={p.address} onChange={(e) => up({ address: e.target.value })} placeholder="House no., street, area, landmark, city" />
         </div>
       ) : (
-        <div><label className="label" htmlFor="c-br">Pickup branch</label><select id="c-br" className="input" value={p.branch} onChange={(e) => up({ branch: e.target.value })}>{BRANCHES.map((b) => <option key={b}>{b}</option>)}</select></div>
+        <div><label className="label" htmlFor="c-br">Pickup branch</label><BranchSelect id="c-br" value={p.branch} picked={!!p.branchPicked} onChange={(branch) => up({ branch, branchPicked: true })} onAuto={(branch) => up({ branch })} /></div>
       )}
     </section>
   );

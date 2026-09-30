@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { Building2, CreditCard, FileText, Loader2, Lock, MapPin, ShieldAlert, Truck } from "lucide-react";
 import { useCart } from "@/components/CartProvider";
 import { Empty } from "@/components/States";
+import { BranchSelect } from "@/components/BranchSelect";
+import { Select } from "@/components/Select";
 import { api, errInfo, newKey } from "@/lib/api";
 import { BRANCHES, fulfilPref, fulfilment, prescriptionIds } from "@/lib/local";
 import { startPayment } from "@/lib/orders";
@@ -26,7 +28,7 @@ export default function CheckoutPage() {
   const router = useRouter();
   const { lines, total, hydrated, clear } = useCart();
   const [mode, setMode] = useState<"delivery" | "pickup">("delivery");
-  const [address, setAddress] = useState(""); const [branch, setBranch] = useState(BRANCHES[0]); const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState(""); const [branch, setBranch] = useState(BRANCHES[0]); const [branchPicked, setBranchPicked] = useState(false); const [phone, setPhone] = useState("");
   const [rx, setRx] = useState(""); const [approved, setApproved] = useState<Prescription[]>([]);
   const [busy, setBusy] = useState<"" | "order" | "pay">("");
   const [err, setErr] = useState<ReturnType<typeof errInfo> | null>(null);
@@ -34,8 +36,8 @@ export default function CheckoutPage() {
   // Stable keys per checkout attempt so a double-click / retry never double-orders or double-charges.
   const orderKey = useRef(newKey()); const payKey = useRef(newKey()); const orderId = useRef<string | null>(null);
 
-  useEffect(() => { const f = fulfilPref.get(); setMode(f.mode); setAddress(f.address); setBranch(f.branch); setPhone(f.phone); }, []);
-  useEffect(() => { fulfilPref.set({ mode, address, branch, phone }); }, [mode, address, branch, phone]);
+  useEffect(() => { const f = fulfilPref.get(); setMode(f.mode); setAddress(f.address); setBranch(f.branch); setBranchPicked(!!f.branchPicked); setPhone(f.phone); }, []);
+  useEffect(() => { fulfilPref.set({ mode, address, branch, phone, branchPicked }); }, [mode, address, branch, phone, branchPicked]);
 
   const needsRx = lines.some((l) => l.requires_prescription);
   const sig = useMemo(() => JSON.stringify([lines.map((l) => [l.product_id, l.quantity]), rx]), [lines, rx]);
@@ -92,7 +94,7 @@ export default function CheckoutPage() {
             </div>
             {mode === "delivery"
               ? <div><label className="label" htmlFor="a">Delivery address</label><textarea id="a" className="input min-h-24" required value={address} onChange={(e) => setAddress(e.target.value)} placeholder="House no., street, area, landmark, city" /></div>
-              : <div><label className="label" htmlFor="b">Pickup branch</label><select id="b" className="input" value={branch} onChange={(e) => setBranch(e.target.value)}>{BRANCHES.map((b) => <option key={b}>{b}</option>)}</select></div>}
+              : <div><label className="label" htmlFor="b">Pickup branch</label><BranchSelect id="b" value={branch} picked={branchPicked} onChange={(b) => { setBranch(b); setBranchPicked(true); }} onAuto={setBranch} /></div>}
             <div><label className="label" htmlFor="ph">Phone for the rider / pickup</label><input id="ph" type="tel" className="input" required value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="024 000 0000" /></div>
           </section></Pending>
 
@@ -100,9 +102,8 @@ export default function CheckoutPage() {
             <section className="card space-y-3 p-6">
               <h2 className="flex items-center gap-2 text-lg font-bold"><FileText size={18} /> 2. Prescription</h2>
               {approved.length ? (
-                <select className="input" value={rx} onChange={(e) => setRx(e.target.value)} aria-label="Approved prescription">
-                  {approved.map((p) => <option key={p.id} value={p.id}>Prescription {shortId(p.id)}{p.note ? ` — ${p.note}` : ""}</option>)}
-                </select>
+                <Select aria-label="Approved prescription" value={rx} onChange={setRx}
+                  options={approved.map((p) => ({ value: p.id, label: `Prescription ${shortId(p.id)}`, sub: p.note ?? undefined }))} />
               ) : (
                 <p className="flex gap-2 rounded-2xl bg-amber-50 p-4 text-sm text-amber-900"><ShieldAlert size={18} className="shrink-0" /><span>You have no approved prescription yet. <Link href="/prescriptions" className="font-semibold underline">Upload one</Link> and come back once a pharmacist approves it.</span></p>
               )}

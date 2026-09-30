@@ -11,7 +11,7 @@ export const fulfilment = {
   get: (orderId: string) => read<Fulfilment | null>(`topup.ful.${orderId}`, null),
   set: (orderId: string, f: Fulfilment) => write(`topup.ful.${orderId}`, f),
 };
-export interface FulfilPref { mode: "delivery" | "pickup"; address: string; branch: string; phone: string }
+export interface FulfilPref { mode: "delivery" | "pickup"; address: string; branch: string; phone: string; branchPicked?: boolean }
 export const fulfilPref = {
   get: (): FulfilPref => read<FulfilPref>("topup.fulpref", { mode: "delivery", address: "", branch: BRANCHES[0], phone: "" }),
   set: (p: FulfilPref) => write("topup.fulpref", p),
@@ -22,4 +22,10 @@ export const notifPrefs = {
   set: (p: unknown) => write("topup.notif", p),
 };
 import { BRANCHES_LIST } from "./branches";
+import type { Place } from "./geo";
 export const BRANCHES = BRANCHES_LIST.filter((b) => !b.wholesale).map((b) => b.name);
+/** "Buying for someone else" — the town they chose instead of their own GPS position. Cleared on sign-out. */
+export const buyingFor = {
+  get: () => read<Place | null>("topup.loc.for", null),
+  set: (p: Place | null) => write("topup.loc.for", p),
+};

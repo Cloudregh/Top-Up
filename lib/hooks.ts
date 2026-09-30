@@ -2,7 +2,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { api, errInfo } from "./api";
-import type { CatalogueItem, Page } from "./types";
+import type { Availability, CatalogueItem, Page } from "./types";
+import { branchStock } from "./branches";
 import { useAuth } from "@/components/AuthProvider";
 
 let suppressAuthRedirect = false;
@@ -64,4 +65,24 @@ export function useCatalogue(q: string, category: string, limit = 12) {
 
   useEffect(() => { if (status === "authed") fetchPage(null, false); }, [status, fetchPage, n]);
   return { items, loading: loading || status === "loading", error, gated, hasMore: !!cursor, more: () => fetchPage(cursor, true), retry: () => setN((x) => x + 1) };
+}
+
+/** Enough of a product to look up its stock (catalogue items and cart lines both fit). */
+export interface StockItem { product_id: string; name: string; availability?: Availability }
+
+/**
+ * Stock of each item at a named branch. Until per-branch stock exists, an out-of-stock product
+ * is out everywhere and anything else is `null` ("call to confirm").
+ */
+export function useBranchStock(items: StockItem[]) {
+  const [stock, setStock] = useState<Record<string, Record<string, Availability> | null>>({});
+  const ids = items.map((i) => i.product_id).join(",");
+  useEffect(() => {
+    if (!ids) return;
+    let live = true;
+    Promise.all(ids.split(",").map(async (id) => [id, await branchStock(id)] as const)).then((r) => live && setStock(Object.fromEntries(r)));
+    return () => { live = false; };
+  }, [ids]);
+  return (item: StockItem, branch: string): Availability | null =>
+    stock[item.product_id]?.[branch] ?? (item.availability === "out_of_stock" ? "out_of_stock" : null);
 }
